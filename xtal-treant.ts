@@ -86,11 +86,7 @@ declare var Treant;
             });
             this.shadowRoot.appendChild(link);
 
-            const link2 = document.createElement('link');
-            link2.setAttribute('rel', 'stylesheet');
-            link2.setAttribute('type', "text/css");
-            link2.setAttribute('href', base + '/examples/basic-example/basic-example.css');
-            this.shadowRoot.appendChild(link2);
+            
             
         
             
@@ -102,7 +98,15 @@ declare var Treant;
         }
         set config(val){
             this._config = val;
-            this._config[0].container = this.shadowRoot.getElementById('chartTarget');
+            const config0 = val[0];
+            if(config0.cssPath){
+                const link = document.createElement('link');
+                link.setAttribute('rel', 'stylesheet');
+                link.setAttribute('type', "text/css");
+                link.setAttribute('href', config0.cssPath);
+                this.shadowRoot.appendChild(link);
+            }
+            config0.container = this.shadowRoot.getElementById('chartTarget');
             this.onPropsChange();
         }
 
