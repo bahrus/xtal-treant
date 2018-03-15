@@ -91,122 +91,24 @@ declare var Treant;
             link2.setAttribute('type', "text/css");
             link2.setAttribute('href', base + '/examples/basic-example/basic-example.css');
             this.shadowRoot.appendChild(link2);
-            var config = {
-                container: this.shadowRoot.getElementById('chartTarget'),
-                
-                connectors: {
-                    type: 'step'
-                },
-                node: {
-                    HTMLclass: 'nodeExample1'
-                }
-            },
-            ceo = {
-                text: {
-                    name: "Mark Hill",
-                    title: "Chief executive officer",
-                    contact: "Tel: 01 213 123 134",
-                },
-                image: "../examples/headshots/2.jpg"
-            },
+            
         
-            cto = {
-                parent: ceo,
-                text:{
-                    name: "Joe Linux",
-                    title: "Chief Technology Officer",
-                },
-                stackChildren: true,
-                image: "../examples/headshots/1.jpg"
-            },
-            cbo = {
-                parent: ceo,
-                stackChildren: true,
-                text:{
-                    name: "Linda May",
-                    title: "Chief Business Officer",
-                },
-                image: "../examples/headshots/5.jpg"
-            },
-            cdo = {
-                parent: ceo,
-                text:{
-                    name: "John Green",
-                    title: "Chief accounting officer",
-                    contact: "Tel: 01 213 123 134",
-                },
-                image: "../examples/headshots/6.jpg"
-            },
-            cio = {
-                parent: cto,
-                text:{
-                    name: "Ron Blomquist",
-                    title: "Chief Information Security Officer"
-                },
-                image: "../examples/headshots/8.jpg"
-            },
-            ciso = {
-                parent: cto,
-                text:{
-                    name: "Michael Rubin",
-                    title: "Chief Innovation Officer",
-                    contact: {val: "we@aregreat.com", href: "mailto:we@aregreat.com"}
-                },
-                image: "../examples/headshots/9.jpg"
-            },
-            cio2 = {
-                parent: cdo,
-                text:{
-                    name: "Erica Reel",
-                    title: "Chief Customer Officer"
-                },
-                link: {
-                    href: "http://www.google.com"
-                },
-                image: "../examples/headshots/10.jpg"
-            },
-            ciso2 = {
-                parent: cbo,
-                text:{
-                    name: "Alice Lopez",
-                    title: "Chief Communications Officer"
-                },
-                image: "../examples/headshots/7.jpg"
-            },
-            ciso3 = {
-                parent: cbo,
-                text:{
-                    name: "Mary Johnson",
-                    title: "Chief Brand Officer"
-                },
-                image: "../examples/headshots/4.jpg"
-            },
-            ciso4 = {
-                parent: cbo,
-                text:{
-                    name: "Kirk Douglas",
-                    title: "Chief Business Development Officer"
-                },
-                image: "../examples/headshots/11.jpg"
-            }
-        
-            const chart_config = [
-                config,
-                ceo,
-                cto,
-                cbo,
-                cdo,
-                cio,
-                ciso,
-                cio2,
-                ciso2,
-                ciso3,
-                ciso4
-            ];
-        
-        
-        
-            new Treant( chart_config );
+            
+        }
+
+        _config;
+        get config(){
+            return this._config;
+        }
+        set config(val){
+            this._config = val;
+            this._config[0].container = this.shadowRoot.getElementById('chartTarget');
+            this.onPropsChange();
+        }
+
+        onPropsChange(){
+            if(!this._config) return;
+            new Treant( this.config);
         }
     }
     customElements.define(xtalTreant, XtalTreant);

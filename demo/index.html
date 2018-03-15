@@ -1,40 +1,170 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>xtal-treant demo</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
-    <script src="../xtal-treant.js"></script>
-    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-    <!-- <link rel="import" href="../xtal-treant.html"> -->
-    <!-- <link rel="stylesheet" href="../Treant.css"> -->
-    <!-- <link rel="stylesheet" href="../examples/basic-example/basic-example.css"> -->
+  <title>xtal-treant demo</title>
+  <script>
+      const config1 = {
+          
+          
+          connectors: {
+              type: 'step'
+          },
+          node: {
+              HTMLclass: 'nodeExample1'
+          }
+      };
+      const ceo = {
+          text: {
+              name: "Mark Hill",
+              title: "Chief executive officer",
+              contact: "Tel: 01 213 123 134",
+          },
+          image: "../examples/headshots/2.jpg"
+      };
+  
+      const cto = {
+          parent: ceo,
+          text:{
+              name: "Joe Linux",
+              title: "Chief Technology Officer",
+          },
+          stackChildren: true,
+          image: "../examples/headshots/1.jpg"
+      };
+      const cbo = {
+          parent: ceo,
+          stackChildren: true,
+          text:{
+              name: "Linda May",
+              title: "Chief Business Officer",
+          },
+          image: "../examples/headshots/5.jpg"
+      };
+      const cdo = {
+          parent: ceo,
+          text:{
+              name: "John Green",
+              title: "Chief accounting officer",
+              contact: "Tel: 01 213 123 134",
+          },
+          image: "../examples/headshots/6.jpg"
+      };
+      const cio = {
+          parent: cto,
+          text:{
+              name: "Ron Blomquist",
+              title: "Chief Information Security Officer"
+          },
+          image: "../examples/headshots/8.jpg"
+      };
+      const ciso = {
+          parent: cto,
+          text:{
+              name: "Michael Rubin",
+              title: "Chief Innovation Officer",
+              contact: {val: "we@aregreat.com", href: "mailto:we@aregreat.com"}
+          },
+          image: "../examples/headshots/9.jpg"
+      };
+      const cio2 = {
+          parent: cdo,
+          text:{
+              name: "Erica Reel",
+              title: "Chief Customer Officer"
+          },
+          link: {
+              href: "http://www.google.com"
+          },
+          image: "../examples/headshots/10.jpg"
+      };
+      const ciso2 = {
+          parent: cbo,
+          text:{
+              name: "Alice Lopez",
+              title: "Chief Communications Officer"
+          },
+          image: "../examples/headshots/7.jpg"
+      };
+      const ciso3 = {
+          parent: cbo,
+          text:{
+              name: "Mary Johnson",
+              title: "Chief Brand Officer"
+          },
+          image: "../examples/headshots/4.jpg"
+      };
+      const ciso4 = {
+          parent: cbo,
+          text:{
+              name: "Kirk Douglas",
+              title: "Chief Business Development Officer"
+          },
+          image: "../examples/headshots/11.jpg"
+      };
+  
+      const chart_config1 = [
+          config1,
+          ceo,
+          cto,
+          cbo,
+          cdo,
+          cio,
+          ciso,
+          cio2,
+          ciso2,
+          ciso3,
+          ciso4
+      ];
+  
+    </script>
+  <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/xtal-decorator@0.0.12/build/ES6/xtal-decorator.js"></script>
+  <script src="../xtal-treant.js"></script>
+  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
 
-    <custom-style>
-      <style is="custom-style" include="demo-pages-shared-styles">
-      </style>
-    </custom-style>
-  </head>
-  <body>
-    <div class="vertical-section-container centered">
-      <h3>Basic xtal-treant demo</h3>
-      <div class="chart" id="basic-example"></div>
-      <!-- <script src="../vendor/raphael.js"></script>
-      <script src="../Treant.js"></script> -->
-      
-      <!-- <script src="../examples/basic-example/basic-example.js"></script>
-      <script>
-         
-      </script> -->
-      <demo-snippet>
-        <template>
-          <xtal-treant></xtal-treant>
-        </template>
-      </demo-snippet>
-    </div>
-  </body>
+  <custom-style>
+    <style is="custom-style" include="demo-pages-shared-styles">
+    </style>
+  </custom-style>
+</head>
+
+<body>
+  <div class="vertical-section-container centered">
+    <h3>Basic xtal-treant demo</h3>
+    <div class="chart" id="basic-example"></div>
+
+    <demo-snippet>
+      <template>
+        <xtal-decorator>
+            <script type="text/ecmascript ish">
+            [{
+              polymerProperties:{
+                example1:{
+                  type: Object,
+                  value:chart_config1
+                }
+
+              }
+            }]
+            </script>
+        </xtal-decorator>
+        <dom-bind>
+          <template>
+            
+            <xtal-treant config="[[example1]]"></xtal-treant>
+          </template>
+        </dom-bind>
+
+      </template>
+    </demo-snippet>
+  </div>
+
+</body>
+
 </html>
