@@ -80,15 +80,23 @@
         }
         set config(val) {
             this._config = val;
-            const config0 = val[0];
-            if (config0.cssPath) {
-                const link = document.createElement('link');
-                link.setAttribute('rel', 'stylesheet');
-                link.setAttribute('type', "text/css");
-                link.setAttribute('href', config0.cssPath);
-                this.shadowRoot.appendChild(link);
+            let rootConfig;
+            if (Array.isArray(val)) {
+                rootConfig = val[0];
             }
-            config0.container = this.shadowRoot.getElementById('chartTarget');
+            else {
+                rootConfig = val.chart;
+            }
+            if (rootConfig.cssPaths) {
+                rootConfig.cssPaths.forEach(cssPath => {
+                    const link = document.createElement('link');
+                    link.setAttribute('rel', 'stylesheet');
+                    link.setAttribute('type', "text/css");
+                    link.setAttribute('href', cssPath);
+                    this.shadowRoot.appendChild(link);
+                });
+            }
+            rootConfig.container = this.shadowRoot.getElementById('chartTarget');
             this.onPropsChange();
         }
         onPropsChange() {

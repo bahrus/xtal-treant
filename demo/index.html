@@ -7,121 +7,175 @@
 
   <title>xtal-treant demo</title>
   <script>
-      const config1 = {
-          cssPath: '../examples/basic-example/basic-example.css',
-          connectors: {
-              type: 'step'
+    const config1 = {
+      cssPaths: ['../examples/basic-example/basic-example.css'],
+      connectors: {
+        type: 'step'
+      },
+      node: {
+        HTMLclass: 'nodeExample1'
+      }
+    };
+    const ceo = {
+      text: {
+        name: "Mark Hill",
+        title: "Chief executive officer",
+        contact: "Tel: 01 213 123 134",
+      },
+      image: "../examples/headshots/2.jpg"
+    };
+
+    const cto = {
+      parent: ceo,
+      text: {
+        name: "Joe Linux",
+        title: "Chief Technology Officer",
+      },
+      stackChildren: true,
+      image: "../examples/headshots/1.jpg"
+    };
+    const cbo = {
+      parent: ceo,
+      stackChildren: true,
+      text: {
+        name: "Linda May",
+        title: "Chief Business Officer",
+      },
+      image: "../examples/headshots/5.jpg"
+    };
+    const cdo = {
+      parent: ceo,
+      text: {
+        name: "John Green",
+        title: "Chief accounting officer",
+        contact: "Tel: 01 213 123 134",
+      },
+      image: "../examples/headshots/6.jpg"
+    };
+    const cio = {
+      parent: cto,
+      text: {
+        name: "Ron Blomquist",
+        title: "Chief Information Security Officer"
+      },
+      image: "../examples/headshots/8.jpg"
+    };
+    const ciso = {
+      parent: cto,
+      text: {
+        name: "Michael Rubin",
+        title: "Chief Innovation Officer",
+        contact: { val: "we@aregreat.com", href: "mailto:we@aregreat.com" }
+      },
+      image: "../examples/headshots/9.jpg"
+    };
+    const cio2 = {
+      parent: cdo,
+      text: {
+        name: "Erica Reel",
+        title: "Chief Customer Officer"
+      },
+      link: {
+        href: "http://www.google.com"
+      },
+      image: "../examples/headshots/10.jpg"
+    };
+    const ciso2 = {
+      parent: cbo,
+      text: {
+        name: "Alice Lopez",
+        title: "Chief Communications Officer"
+      },
+      image: "../examples/headshots/7.jpg"
+    };
+    const ciso3 = {
+      parent: cbo,
+      text: {
+        name: "Mary Johnson",
+        title: "Chief Brand Officer"
+      },
+      image: "../examples/headshots/4.jpg"
+    };
+    const ciso4 = {
+      parent: cbo,
+      text: {
+        name: "Kirk Douglas",
+        title: "Chief Business Development Officer"
+      },
+      image: "../examples/headshots/11.jpg"
+    };
+
+    const chart_config1 = [
+      config1,
+      ceo,
+      cto,
+      cbo,
+      cdo,
+      cio,
+      ciso,
+      cio2,
+      ciso2,
+      ciso3,
+      ciso4
+    ];
+
+
+    const collapsible_config = {
+      chart: {
+        cssPaths:['../examples/collapsable/collapsable.css'],
+
+        animateOnInit: true,
+
+        node: {
+          collapsable: true
+        },
+        animation: {
+          nodeAnimation: "easeOutBounce",
+          nodeSpeed: 700,
+          connectorsAnimation: "bounce",
+          connectorsSpeed: 700
+        }
+      },
+      nodeStructure: {
+        image: "../examples/collapsable/img/malory.png",
+        children: [
+          {
+            image: "../examples/collapsable/img/lana.png",
+            collapsed: true,
+            children: [
+              {
+                image: "../examples/collapsable/img/figgs.png"
+              }
+            ]
           },
-          node: {
-              HTMLclass: 'nodeExample1'
+          {
+            image: "../examples/collapsable/img/sterling.png",
+            childrenDropLevel: 1,
+            children: [
+              {
+                image: "../examples/collapsable/img/woodhouse.png"
+              }
+            ]
+          },
+          {
+            pseudo: true,
+            children: [
+              {
+                image: "../examples/collapsable/img/cheryl.png"
+              },
+              {
+                image: "../examples/collapsable/img/pam.png"
+              }
+            ]
           }
-      };
-      const ceo = {
-          text: {
-              name: "Mark Hill",
-              title: "Chief executive officer",
-              contact: "Tel: 01 213 123 134",
-          },
-          image: "../examples/headshots/2.jpg"
-      };
-  
-      const cto = {
-          parent: ceo,
-          text:{
-              name: "Joe Linux",
-              title: "Chief Technology Officer",
-          },
-          stackChildren: true,
-          image: "../examples/headshots/1.jpg"
-      };
-      const cbo = {
-          parent: ceo,
-          stackChildren: true,
-          text:{
-              name: "Linda May",
-              title: "Chief Business Officer",
-          },
-          image: "../examples/headshots/5.jpg"
-      };
-      const cdo = {
-          parent: ceo,
-          text:{
-              name: "John Green",
-              title: "Chief accounting officer",
-              contact: "Tel: 01 213 123 134",
-          },
-          image: "../examples/headshots/6.jpg"
-      };
-      const cio = {
-          parent: cto,
-          text:{
-              name: "Ron Blomquist",
-              title: "Chief Information Security Officer"
-          },
-          image: "../examples/headshots/8.jpg"
-      };
-      const ciso = {
-          parent: cto,
-          text:{
-              name: "Michael Rubin",
-              title: "Chief Innovation Officer",
-              contact: {val: "we@aregreat.com", href: "mailto:we@aregreat.com"}
-          },
-          image: "../examples/headshots/9.jpg"
-      };
-      const cio2 = {
-          parent: cdo,
-          text:{
-              name: "Erica Reel",
-              title: "Chief Customer Officer"
-          },
-          link: {
-              href: "http://www.google.com"
-          },
-          image: "../examples/headshots/10.jpg"
-      };
-      const ciso2 = {
-          parent: cbo,
-          text:{
-              name: "Alice Lopez",
-              title: "Chief Communications Officer"
-          },
-          image: "../examples/headshots/7.jpg"
-      };
-      const ciso3 = {
-          parent: cbo,
-          text:{
-              name: "Mary Johnson",
-              title: "Chief Brand Officer"
-          },
-          image: "../examples/headshots/4.jpg"
-      };
-      const ciso4 = {
-          parent: cbo,
-          text:{
-              name: "Kirk Douglas",
-              title: "Chief Business Development Officer"
-          },
-          image: "../examples/headshots/11.jpg"
-      };
-  
-      const chart_config1 = [
-          config1,
-          ceo,
-          cto,
-          cbo,
-          cdo,
-          cio,
-          ciso,
-          cio2,
-          ciso2,
-          ciso3,
-          ciso4
-      ];
-  
-    </script>
+        ]
+      }
+    };
+
+  </script>
   <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
   <script async src="https://cdn.jsdelivr.net/npm/xtal-decorator@0.0.12/build/ES6/xtal-decorator.js"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/xtal-json-editor/build/ES6/xtal-json-editor.js"></script>
   <script src="../xtal-treant.js"></script>
   <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
   <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
@@ -141,12 +195,16 @@
     <demo-snippet>
       <template>
         <xtal-decorator>
-            <script type="text/ecmascript ish">
+          <script type="text/ecmascript ish">
             [{
               polymerProperties:{
-                example1:{
+                basicExample:{
                   type: Object,
                   value:chart_config1
+                },
+                collapsibleExample:{
+                  type: Object,
+                  value: collapsible_config
                 }
 
               }
@@ -155,8 +213,17 @@
         </xtal-decorator>
         <dom-bind>
           <template>
-            
-            <xtal-treant config="[[example1]]"></xtal-treant>
+            <h3>Basic Example</h3>
+            <xtal-treant config="[[basicExample]]"></xtal-treant>
+
+            <h4>Configuration for Basic Example</h4>
+            <xtal-json-editor watch="[[basicExample]]" height="300px"></xtal-json-editor>
+
+            <h3>Collapsible Example</h3>
+            <xtal-treant config="[[collapsibleExample]]"></xtal-treant>
+
+            <h4>Configuration for Collapsible Example</h4>
+            <xtal-json-editor watch="[[collapsibleExample]]" height="300px"></xtal-json-editor>
           </template>
         </dom-bind>
 
