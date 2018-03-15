@@ -124,6 +124,7 @@
          * @returns {Element|jQuery}
          */
         findEl: function( selector, raw, parentEl ) {
+            if(selector.tagName) return selector;
             parentEl = parentEl || document;
 
             if ( $ ) {
