@@ -1,6 +1,12 @@
 # \<xtal-treant\>
 
+xtal-treant is a dependency free web component wrapper around the great [Treant](http://fperucic.github.io/treant-js/) library.
 
+The web component requires a property, "config" to be set:
+
+```html
+<xtal-treant config="[[treeBeard]]"></xtal-treant>
+```
 
 ## Install the Polymer-CLI
 
