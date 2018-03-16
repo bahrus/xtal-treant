@@ -50,12 +50,20 @@
             display: block;
         }
     </style>
+    <slot></slot>
     <div id="chartTarget" style="visibility:hidden"></div>`;
     class XtalTreant extends HTMLElement {
         constructor() {
             super();
+            this._slotted = false;
             this.attachShadow({ mode: 'open' });
             this.shadowRoot.appendChild(template.content.cloneNode(true));
+            const slot = this.shadowRoot.querySelector('slot');
+            slot.addEventListener('slotchange', e => {
+                this._slotted = true;
+                this.onPropsChange();
+                console.log('light dom children changed!');
+            });
         }
         connectedCallback() {
             // BillboardCharts.observedAttributes.forEach(attrib => {
@@ -102,7 +110,13 @@
         onPropsChange() {
             if (!this._config)
                 return;
-            new Treant(this.config);
+            // console.log({
+            //     innerHTML: this.innerHTML
+            // })
+            if (!this._slotted && this.innerHTML.trim().length > 0)
+                return;
+            //console.log('proceeding');
+            new Treant(this.config, null, null, this);
         }
     }
     customElements.define(xtalTreant, XtalTreant);

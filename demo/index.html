@@ -122,7 +122,7 @@
 
     const collapsible_config = {
       chart: {
-        cssPaths:['../examples/collapsable/collapsable.css'],
+        cssPaths: ['../examples/collapsable/collapsable.css'],
 
         animateOnInit: true,
 
@@ -172,6 +172,45 @@
       }
     };
 
+    const commentsConfig = {
+      cssPaths:['../examples/comments/example8.css'],
+      levelSeparation: 70,
+      siblingSeparation: 60,
+      nodeAlign: "BOTTOM",
+      connectors: {
+        type: "step",
+        style: {
+          "stroke-width": 2,
+          "stroke": "#ccc",
+          "stroke-dasharray": "--", //"", "-", ".", "-.", "-..", ". ", "- ", "--", "- .", "--.", "--.."
+          "arrow-end": "classic-wide-long"
+        }
+      }
+    };
+
+    const first_post = {
+      innerHTML: "#first-post"
+    };
+
+    const first_reply = {
+      parent: first_post,
+      innerHTML: "#first-reply"
+    };
+
+    const second_reply = {
+      parent: first_post,
+      innerHTML: "#second-reply"
+    };
+
+    const second_reply_reply = {
+      parent: second_reply,
+      innerHTML: "#second-reply-reply"
+    };
+
+    const comments_tree_structure = [
+      commentsConfig, first_post, first_reply, second_reply, second_reply_reply
+    ];
+
   </script>
   <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
   <script async src="https://cdn.jsdelivr.net/npm/xtal-decorator@0.0.12/build/ES6/xtal-decorator.js"></script>
@@ -192,21 +231,25 @@
     <h3>Basic xtal-treant demo</h3>
     <div class="chart" id="basic-example"></div>
 
-    <demo-snippet>
+    <demo-snippet style="width:1200px">
       <template>
         <xtal-decorator>
           <script type="text/ecmascript ish">
             [{
               polymerProperties:{
                 basicExample:{
-                  type: Object,
+                  type: Array,
                   value:chart_config1
                 },
                 collapsibleExample:{
                   type: Object,
                   value: collapsible_config
+                },
+                commentsExample:{
+                  type: Array,
+                  value: comments_tree_structure
                 }
-
+                
               }
             }]
             </script>
@@ -224,6 +267,62 @@
 
             <h4>Configuration for Collapsible Example</h4>
             <xtal-json-editor watch="[[collapsibleExample]]" height="300px"></xtal-json-editor>
+
+            <h3>Comments, selector example</h3>
+            <xtal-treant config="[[commentsExample]]">
+                <div class="comments" style="display:none">
+                    <ul>
+                        <li>
+                            <div id="first-post" class="comment">
+                                <img alt="Avatar" src="../examples/comments/avatar.jpg">
+                                <p>
+                                    <span class="user">John Smitt</span> &mdash; 
+                                    <span class="line-truncate">
+                                        <em>Treant.js</em> is an library that handles drawing and visualisation of tree structural charts. What does that mean?
+                                    </span>
+                                </p>
+                            </div>
+                            <ul>
+                                <li>
+                                    <div id="first-reply" class="comment">
+                                        <img alt="Avatar" src="../examples/comments/avatar.jpg">
+                                        <p>
+                                            <span class="user"> Peter Griffin </span> &mdash; 
+                                            <span class="line-truncate">
+                                                Great collection! A lot of good inspiration. Thanks!
+                                            </span>
+                                        </p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div id="second-reply" class="comment">
+                                        <img alt="Avatar" src="../examples/comments/avatar.jpg">
+                                        <p>
+                                            <span class="user">Jane Black</span> &mdash; 
+                                            <span class="line-truncate">
+                                                Thanks for tutorial. One issue I have is that all tutorials is on dev environment. What about production? what differences between …
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <ul>
+                                        <li>
+                                            <div id="second-reply-reply" class="comment">
+                                                <img alt="Avatar" src="../examples/comments/avatar.jpg">
+                                                <p>
+                                                    <span class="user"> Joe Linux </span> &mdash; 
+                                                    <span class="line-truncate">
+                                                        Looks very promising. I'll have to take a closer look some time.
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </xtal-treant>
           </template>
         </dom-bind>
 

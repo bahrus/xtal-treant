@@ -348,9 +348,9 @@
          * @param {object} jsonConfig
          * @returns {Tree}
          */
-        createTree: function( jsonConfig ) {
+        createTree: function( jsonConfig, container ) {
             var nNewTreeId = this.store.length;
-            this.store.push( new Tree( jsonConfig, nNewTreeId ) );
+            this.store.push( new Tree( jsonConfig, nNewTreeId, container ) );
             return this.get( nNewTreeId );
         },
 
@@ -401,14 +401,14 @@
      * @param {number} treeId
      * @constructor
      */
-    var Tree = function (jsonConfig, treeId ) {
+    var Tree = function (jsonConfig, treeId, container ) {
 
         /**
          * @param {object} jsonConfig
          * @param {number} treeId
          * @returns {Tree}
          */
-        this.reset = function( jsonConfig, treeId ) {
+        this.reset = function( jsonConfig, treeId, container ) {
             this.initJsonConfig = jsonConfig;
             this.initTreeId = treeId;
 
@@ -427,7 +427,7 @@
 
             this.imageLoader = new ImageLoader();
 
-            this.nodeDB = new NodeDB( jsonConfig.nodeStructure, this );
+            this.nodeDB = new NodeDB( jsonConfig.nodeStructure, this , container);
 
             // key store for storing reference to node connectors,
             // key = nodeId where the connector ends
@@ -444,11 +444,11 @@
          * @returns {Tree}
          */
         this.reload = function() {
-            this.reset( this.initJsonConfig, this.initTreeId ).redraw();
+            this.reset( this.initJsonConfig, this.initTreeId , container).redraw();
             return this;
         };
 
-        this.reset( jsonConfig, treeId );
+        this.reset( jsonConfig, treeId, container);
     };
 
     Tree.prototype = {
@@ -1093,8 +1093,8 @@
      * @param {Tree} tree
      * @constructor
      */
-    var NodeDB = function ( nodeStructure, tree ) {
-        this.reset( nodeStructure, tree )
+    var NodeDB = function ( nodeStructure, tree, container ) {
+        this.reset( nodeStructure, tree, container )
     };
 
     NodeDB.prototype = {
@@ -1104,7 +1104,7 @@
          * @param {Tree} tree
          * @returns {NodeDB}
          */
-        reset: function( nodeStructure, tree ) {
+        reset: function( nodeStructure, tree, container ) {
 
             this.db = [];
 
@@ -1157,7 +1157,7 @@
 
             iterateChildren( nodeStructure, -1 ); // root node
 
-            this.createGeometries( tree );
+            this.createGeometries( tree, container );
 
             return this;
         },
@@ -1166,11 +1166,11 @@
          * @param {Tree} tree
          * @returns {NodeDB}
          */
-        createGeometries: function( tree ) {
+        createGeometries: function( tree, container ) {
             var i = this.db.length;
 
             while ( i-- ) {
-                this.get( i ).createGeometry( tree );
+                this.get( i ).createGeometry( tree, container );
             }
             return this;
         },
@@ -1886,7 +1886,7 @@
      *
      * @Returns node the configured node
      */
-    TreeNode.prototype.buildNodeFromHtml = function(node) {
+    TreeNode.prototype.buildNodeFromHtml = function(node, container) {
         // get some element by ID and clone its structure into a node
         if (this.nodeInnerHTML.charAt(0) === "#") {
             var elem = document.getElementById(this.nodeInnerHTML.substring(1));
@@ -1909,7 +1909,7 @@
     /**
      * @param {Tree} tree
      */
-    TreeNode.prototype.createGeometry = function( tree ) {
+    TreeNode.prototype.createGeometry = function( tree, container ) {
         if ( this.id === 0 && tree.CONFIG.hideRootNode ) {
             this.width = 0;
             this.height = 0;
@@ -1947,7 +1947,7 @@
 
         /////////// BUILD NODE CONTENT //////////////
         if ( !this.pseudo ) {
-            node = this.nodeInnerHTML? this.buildNodeFromHtml(node) : this.buildNodeFromText(node)
+            node = this.nodeInnerHTML? this.buildNodeFromHtml(node, container) : this.buildNodeFromText(node, container)
 
             // handle collapse switch
             if ( this.collapsed || (this.collapsable && this.childrenCount() && !this.stackParentId) ) {
@@ -2147,7 +2147,8 @@
     /**
      * Chart constructor.
      */
-    var Treant = function( jsonConfig, callback, jQuery ) {
+    var Treant = function( jsonConfig, callback, jQuery, container ) {
+        this.container = container;
         if ( jsonConfig instanceof Array ) {
             jsonConfig = JSONconfig.make( jsonConfig );
         }
@@ -2157,7 +2158,7 @@
             $ = jQuery;
         }
 
-        this.tree = TreeStore.createTree( jsonConfig );
+        this.tree = TreeStore.createTree( jsonConfig, container );
         this.tree.positionTree( callback );
     };
 
