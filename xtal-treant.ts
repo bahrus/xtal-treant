@@ -60,7 +60,7 @@ declare var Treant;
         }
     </style>
     <slot></slot>
-    <div id="chartTarget" style="visibility:hidden"></div>`;
+    <div id="chartTarget"></div>`;
     class XtalTreant extends HTMLElement{
         _slotted = false;
         constructor() {
@@ -88,7 +88,9 @@ declare var Treant;
             link.setAttribute('type', "text/css");
             link.setAttribute('href', base + '/Treant.css');
             link.addEventListener('load', e => {
-                this.shadowRoot.getElementById('chartTarget').style.visibility = 'visible';
+                this._mainCssLoaded = true;
+                this.onPropsChange();
+                //this.shadowRoot.getElementById('chartTarget').style.visibility = 'visible';
                 //if(this._chart) this._chart.resize();
             });
             this.shadowRoot.appendChild(link);
@@ -98,7 +100,8 @@ declare var Treant;
         
             
         }
-
+        _mainCssLoaded;
+        _customCssLoaded;
         _config;
         get config(){
             return this._config;
@@ -112,28 +115,41 @@ declare var Treant;
             }else{
                rootConfig = val.chart;
             }
-            if(rootConfig.cssPaths){
+            const cssPaths = rootConfig.cssPaths;
+            if(cssPaths){
+                let cssPathsCopy = cssPaths.slice()as string[];;
                 rootConfig.cssPaths.forEach(cssPath =>{
                     const link = document.createElement('link');
                     link.setAttribute('rel', 'stylesheet');
                     link.setAttribute('type', "text/css");
                     link.setAttribute('href', cssPath);
+                    link.addEventListener('load', e => {
+                        cssPathsCopy = cssPathsCopy.filter(path => path !== cssPath);
+                        if(cssPathsCopy.length === 0) this._secondaryCssLoaded = true;
+                        this.onPropsChange();
+                    });
                     this.shadowRoot.appendChild(link);
+
                 })
 
+            }else{
+                this._secondaryCssLoaded = true;
             }
             rootConfig.container = this.shadowRoot.getElementById('chartTarget');
             this.onPropsChange();
         }
-
+        _secondaryCssLoaded;
         onPropsChange(){
-            if(!this._config) return;
+            if(!this._config || !this._mainCssLoaded || !this._secondaryCssLoaded) return;
             // console.log({
             //     innerHTML: this.innerHTML
             // })
             if(!this._slotted && this.innerHTML.trim().length > 0) return;
             //console.log('proceeding');
-            new Treant( this.config, null, null, this);
+            setTimeout(() =>{
+                new Treant( this.config, null, null, this);
+            }, 0);
+            
         }
     }
     customElements.define(xtalTreant, XtalTreant);
