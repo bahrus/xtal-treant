@@ -430,7 +430,7 @@ const simple_chart_config = [
   <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
   <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
   <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
-
+  <link rel="import" href="../../resizable-panels/resizable-panels.html">
   <custom-style>
     <style is="custom-style" include="demo-pages-shared-styles">
     </style>
@@ -442,7 +442,7 @@ const simple_chart_config = [
     <h3>Basic xtal-treant demo</h3>
     <div class="chart" id="basic-example"></div>
 
-    <demo-snippet style="width:1200px;position:relative;left:-300px;">
+    <demo-snippet>
       <template>
         <xtal-decorator>
           <script type="text/ecmascript ish">
@@ -475,16 +475,16 @@ const simple_chart_config = [
         <dom-bind>
           <template>
             <h3>Basic Example</h3>
-            <xtal-treant config="[[basicExample]]"></xtal-treant>
+            <xtal-treant zoom="0.5" config="[[basicExample]]"></xtal-treant>
 
             <h4>Configuration for Basic Example</h4>
             <xtal-json-editor watch="[[basicExample]]" height="300px"></xtal-json-editor>
 
             <h3>Collapsible Example</h3>
-            <xtal-treant config="[[collapsibleExample]]"></xtal-treant>
+            <xtal-treant zoom="0.5" config="[[collapsibleExample]]"></xtal-treant>
 
             <h4>Configuration for Collapsible Example</h4>
-            <xtal-json-editor watch="[[collapsibleExample]]" height="300px"></xtal-json-editor>
+            <xtal-json-editor zoom="0.5" watch="[[collapsibleExample]]" height="300px"></xtal-json-editor>
 
             <h3>Comments, selector example</h3>
             <xtal-treant config="[[commentsExample]]">
@@ -553,6 +553,13 @@ const simple_chart_config = [
 
             <h3>Super Simple Example</h3>
             <xtal-treant config="[[simple_chart_config]]"></xtal-treant>
+            <h4>Configuration for Super Simple Example</h4>
+            <xtal-json-editor watch="[[simple_chart_config]]" height="300px"></xtal-json-editor>
+            
+            <!-- <resizable-panels>
+                <div class="panel p1"><xtal-treant config="[[simple_chart_config]]"></xtal-treant></div>
+                <div class="panel p2"><xtal-treant config="[[connectorExample]]"></xtal-treant></div>
+            </resizable-panels> -->
 
           </template>
 

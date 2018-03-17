@@ -8,6 +8,12 @@ The web component requires a property, "config" to be set:
 <xtal-treant config="[[treeBeard]]"></xtal-treant>
 ```
 
+You can set the zoom factor thusly:
+
+```html
+<xtal-treant zoom="0.5" config="[[treeBeard]]"></xtal-treant>
+```
+
 ## Install the Polymer-CLI
 
 First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your element locally.
