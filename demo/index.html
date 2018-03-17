@@ -376,6 +376,52 @@ const connectorExample = {
 	}
 };
 
+
+// const simple_chart_config = {
+// 	chart: {
+// 		cssPaths:['../examples/super-simple/super-simple.css']
+// 	},
+	
+// 	nodeStructure: {
+// 		text: { name: "Parent node" },
+// 		children: [
+// 			{
+// 				text: { name: "First child" }
+// 			},
+// 			{
+// 				text: { name: "Second child" }
+// 			}
+// 		]
+// 	}
+// };
+
+// // // // // // // // // // // // // // // // // // // // // // // // 
+
+const main_super_simple_config = {
+  //container: "#OrganiseChart-simple"
+  cssPaths:['../examples/super-simple/super-simple.css']
+};
+
+const parent_node = {
+	text: { name: "Parent node" }
+};
+
+const first_child = {
+	parent: parent_node,
+	text: { name: "First child" }
+};
+
+const second_child = {
+	parent: parent_node,
+	text: { name: "Second child" }
+};
+
+const simple_chart_config = [
+  main_super_simple_config, 
+  parent_node,
+  first_child, 
+  second_child 
+];
   </script>
   <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
   <script async src="https://cdn.jsdelivr.net/npm/xtal-decorator@0.0.12/build/ES6/xtal-decorator.js"></script>
@@ -417,6 +463,10 @@ const connectorExample = {
                 connectorExample:{
                   type: Object,
                   value: connectorExample
+                },
+                simple_chart_config:{
+                  type:  Array,
+                  value: simple_chart_config
                 }
               }
             }]
@@ -500,7 +550,13 @@ const connectorExample = {
 
             <h4>Configuration for Connector Example</h4>
             <xtal-json-editor watch="[[connectorExample]]" height="300px"></xtal-json-editor>
+
+            <h3>Super Simple Example</h3>
+            <xtal-treant config="[[simple_chart_config]]"></xtal-treant>
+
           </template>
+
+            
         </dom-bind>
 
       </template>
