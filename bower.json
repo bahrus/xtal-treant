@@ -3,7 +3,7 @@
   "main": "xtal-treant.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
-    "resizable-panels": "kcmr/resizable-panels#^2.0.4"
+    "vaadin-split-layout": "vaadin/vaadin-split-layout#^3.0.1"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
