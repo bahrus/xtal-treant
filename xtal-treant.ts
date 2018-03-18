@@ -63,7 +63,7 @@ declare var Treant;
     </style>
     <slot></slot>
     <div id="resizingElement" style="width:100%;height:100%">
-        <div id="chartTarget" style="width:100%;overflow:hidden"></div>
+        <div id="chartTarget" style="width:100%;height:100%"></div>
     </div>
     `;
     class XtalTreant extends HTMLElement {

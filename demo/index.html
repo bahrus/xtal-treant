@@ -422,6 +422,8 @@ const simple_chart_config = [
   first_child, 
   second_child 
 ];
+
+// const simple_chart_config2 = JSON.parse( JSON.stringify( simple_chart_config));
   </script>
   <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
   <script async src="https://cdn.jsdelivr.net/npm/xtal-decorator@0.0.12/build/ES6/xtal-decorator.js"></script>
@@ -552,15 +554,31 @@ const simple_chart_config = [
             <h4>Configuration for Connector Example</h4>
             <xtal-json-editor watch="[[connectorExample]]" height="300px"></xtal-json-editor>
 
-            <h3>Super Simple Example</h3>
-            <xtal-treant config="[[simple_chart_config]]"></xtal-treant>
-            <h4>Configuration for Super Simple Example</h4>
-            <xtal-json-editor watch="[[simple_chart_config]]" height="300px"></xtal-json-editor>
-            
-            <resizable-panels>
-                <div class="panel p1"><xtal-treant auto-zoom config="[[simple_chart_config]]"></xtal-treant></div>
-                <div class="panel p2"><xtal-treant auto-zoom config="[[connectorExample]]"></xtal-treant></div>
+            <!-- <h3>Super Simple Example</h3>
+            <xtal-treant style="height:400px;" config="[[simple_chart_config]]"></xtal-treant> -->
+            <!-- <h4>Configuration for Super Simple Example</h4>
+            <xtal-json-editor watch="[[simple_chart_config]]" height="300px"></xtal-json-editor> -->
+            <h3>Resizable</h3>
+            <resizable-panels style="width:100%">
+                <div class="panel p1" style="width:50%;background-color:#FFFFCC">
+                  <xtal-treant auto-zoom config="[[simple_chart_config]]"></xtal-treant>
+                </div>
+                <div class="panel p2" style="width:50%;background-color:#CCFFFF">
+                  <xtal-treant auto-zoom config="[[connectorExample]]"></xtal-treant>
+                </div>
             </resizable-panels>
+
+            <resizable-panels style="width:100%">
+                <div class="panel p1" style="width:50%">
+                  <h4>Configuration for Super Simple Example</h4>
+                  <xtal-json-editor watch="[[simple_chart_config]]" height="300px"></xtal-json-editor>
+                </div>
+                <div class="panel p2" style="width:50%">
+                  <h4>Configuration for Connector Example</h4>
+                  <xtal-json-editor watch="[[connectorExample]]" height="300px"></xtal-json-editor>
+                </div>
+            </resizable-panels>
+
 
           </template>
 
