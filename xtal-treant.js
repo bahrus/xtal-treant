@@ -160,6 +160,8 @@
                 for (let entry of entries) {
                     // entry.target.style.borderRadius = Math.max(0, 250 - entry.contentRect.width) + 'px';
                     const svg = entry.target.querySelector('svg');
+                    if (!svg)
+                        return;
                     this.zoom = entry['contentRect'].width / svg.clientWidth;
                     console.log(this.zoom);
                     //svg.setAttribute('viewBox', '0 0 ' + entry['contentRect'].width + ' ' + entry['contentRect'].height);

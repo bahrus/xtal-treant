@@ -173,6 +173,7 @@ declare var Treant;
                     // entry.target.style.borderRadius = Math.max(0, 250 - entry.contentRect.width) + 'px';
 
                     const svg = (entry.target as HTMLDivElement).querySelector('svg') as SVGElement;
+                    if(!svg) return;
                     this.zoom = entry['contentRect'].width / svg.clientWidth;
                     console.log(this.zoom);
                     //svg.setAttribute('viewBox', '0 0 ' + entry['contentRect'].width + ' ' + entry['contentRect'].height);
