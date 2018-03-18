@@ -174,10 +174,10 @@ declare var Treant;
 
                     const svg = (entry.target as HTMLDivElement).querySelector('svg') as SVGElement;
                     if(!svg) return;
-                    let width = svg.clientWidth;
-                    if(width === 0){
-                        width = svg['width'].baseVal.value;
-                    }
+                    //let width = svg.clientWidth;
+                    //if(width === 0){
+                        const width = svg['width'].baseVal.value;
+                    //}
                     this.zoom = entry['contentRect'].width / width;
                     //console.log(this.zoom);
                     //svg.setAttribute('viewBox', '0 0 ' + entry['contentRect'].width + ' ' + entry['contentRect'].height);
