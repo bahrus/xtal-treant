@@ -98,7 +98,9 @@
                         cssPathsCopy = cssPathsCopy.filter(path => path !== cssPath);
                         if (cssPathsCopy.length === 0)
                             this._secondaryCssLoaded = true;
-                        this.onPropsChange();
+                        setTimeout(() => {
+                            this.onPropsChange();
+                        }, 100);
                     });
                     this.shadowRoot.appendChild(link);
                 });
@@ -224,7 +226,7 @@
                 this._treant = new Treant(this.config, null, null, this);
                 if (this._zoom > 0)
                     this.setZoom(this._zoom);
-            }, 0);
+            }, 1000);
         }
         //_zoomInProgress = false;
         setZoom(zoom) {
