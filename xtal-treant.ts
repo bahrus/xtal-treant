@@ -1,4 +1,5 @@
 declare var xtal_treant;
+declare class ResizeObserver extends MutationObserver { };
 declare var _raphael, _treant: HTMLLinkElement;
 declare var Treant;
 (function () {
@@ -61,7 +62,10 @@ declare var Treant;
         
     </style>
     <slot></slot>
-    <div id="chartTarget" style="width:100%"></div>`;
+    <div id="resizingElement" style="width:100%;height:100%">
+        <div id="chartTarget" style="width:100%;overflow:hidden"></div>
+    </div>
+    `;
     class XtalTreant extends HTMLElement {
         _slotted = false;
         constructor() {
@@ -112,12 +116,24 @@ declare var Treant;
             this.onPropsChange();
         }
 
-        _zoom : number = 0;
-        get zoom(){
+        _zoom: number = 0;
+        get zoom() {
             return this._zoom;
         }
-        set zoom(val){
+        set zoom(val) {
             this.setAttribute('zoom', val.toString());
+        }
+
+        _autoZoom: boolean;
+        get autoZoom() {
+            return this._autoZoom;
+        }
+        set autoZoom(val) {
+            if (val) {
+                this.setAttribute('auto-zoom', '');
+            } else {
+                this.removeAttribute('auto-zoom');
+            }
         }
 
         static get observedAttributes() {
@@ -125,8 +141,11 @@ declare var Treant;
                 /** @type {number} 
                  * Specify a zoom manification / miniaturizaion factor
                  */
-                'zoom'
-
+                'zoom',
+                /** @type {boolean} 
+                 * Indicatethat the chart should fill the container
+                */
+                'auto-zoom'
             ]
         }
         _zoomSequence = [];
@@ -136,7 +155,33 @@ declare var Treant;
                     this._zoom = parseFloat(newValue);
                     this.onPropsChange();
                     break;
+                case 'auto-zoom':
+                    this._autoZoom = newValue !== null;
+                    if (this._autoZoom) {
+                        this.configureAutoZoom();
+                    } else {
+                        this.discontinueAutoZoom();
+                    }
             }
+        }
+        ro: ResizeObserver;
+        configureAutoZoom() {
+            this.ro = new ResizeObserver(entries => {
+                console.log('zoominprogress = ' + this._zoomInProgress);
+                if(this._zoomInProgress) return;
+                for (let entry of entries) {
+                    // entry.target.style.borderRadius = Math.max(0, 250 - entry.contentRect.width) + 'px';
+
+                    const svg = (entry.target as HTMLDivElement).querySelector('svg') as SVGElement;
+                    this.zoom = entry['contentRect'].width / svg.clientWidth;
+                    console.log(this.zoom);
+                    //svg.setAttribute('viewBox', '0 0 ' + entry['contentRect'].width + ' ' + entry['contentRect'].height);
+                }
+            });
+            this.ro.observe(this.getResizingTarget(), null);
+        }
+        discontinueAutoZoom() {
+            this.ro.disconnect();
         }
         connectedCallback() {
             // BillboardCharts.observedAttributes.forEach(attrib => {
@@ -164,11 +209,17 @@ declare var Treant;
 
 
         }
+        disconnectedCallback() {
+            this.discontinueAutoZoom();
+        }
         _mainCssLoaded;
         _customCssLoaded;
 
-        getChartTarget(){
-            return this.shadowRoot.getElementById('chartTarget')  as HTMLDivElement;;
+        getChartTarget() {
+            return this.shadowRoot.getElementById('chartTarget') as HTMLDivElement;;
+        }
+        getResizingTarget(){
+            return this.shadowRoot.getElementById('resizingElement') as HTMLDivElement;
         }
         _secondaryCssLoaded;
         _treant;
@@ -179,35 +230,45 @@ declare var Treant;
             // })
             if (!this._slotted && this.innerHTML.trim().length > 0) return;
             //console.log('proceeding');
-            if(this._treant && this._zoom > 0){
+            if (this._treant && this._zoom > 0) {
                 this.setZoom(this._zoom);
                 return;
             }
             setTimeout(() => {
                 this._treant = new Treant(this.config, null, null, this);
-                if(this._zoom > 0) this.setZoom(this._zoom);
+                if (this._zoom > 0) this.setZoom(this._zoom);
             }, 0);
 
         }
-
+        _zoomInProgress = false;
         setZoom(zoom) {
             //https://jsfiddle.net/ex1f181o/
-
+            this._zoomInProgress = true;
             const transformOrigin = [0, 0];
             //el = el || instance.getContainer();
-            const el = this.getChartTarget();
-            var p = ["webkit", "moz", "ms", "o"],
-                s = "scale(" + zoom + ")",
-                oString = (transformOrigin[0] * 100) + "% " + (transformOrigin[1] * 100) + "%";
+            const el = this.getChartTarget();//.querySelector('svg');
+            if (!el) return;
+            //for (var i = 0, ii = div.childElementCount; i < ii; i++) {
+                //const el = div.childNodes[i] as HTMLElement;
+                var p = ["webkit", "moz", "ms", "o"],
+                    s = "scale(" + zoom + ")",
+                    oString = (transformOrigin[0] * 100) + "% " + (transformOrigin[1] * 100) + "%";
 
-            for (var i = 0; i < p.length; i++) {
-                el.style[p[i] + "Transform"] = s;
-                el.style[p[i] + "TransformOrigin"] = oString;
-            }
+                for (var i = 0; i < p.length; i++) {
+                    el.style[p[i] + "Transform"] = s;
+                    el.style[p[i] + "TransformOrigin"] = oString;
+                }
 
-            el.style .transform = s;
-            el.style.transformOrigin = oString;
-            el.style.width = (100 / zoom) + '%';
+                el.style.transform = s;
+                el.style.transformOrigin = oString;
+                
+                el.style.width = (100 / zoom) + '%';
+                setTimeout( () =>{
+                    this._zoomInProgress = false;
+                }, 1000)
+                
+            //}
+
         }
     }
     customElements.define(xtalTreant, XtalTreant);

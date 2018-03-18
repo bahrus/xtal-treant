@@ -425,6 +425,7 @@ const simple_chart_config = [
   </script>
   <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
   <script async src="https://cdn.jsdelivr.net/npm/xtal-decorator@0.0.12/build/ES6/xtal-decorator.js"></script>
+  <!-- <script async src="xtal-decorator.js"></script> -->
   <script async src="https://cdn.jsdelivr.net/npm/xtal-json-editor/build/ES6/xtal-json-editor.js"></script>
   <script src="../xtal-treant.js"></script>
   <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
@@ -556,10 +557,10 @@ const simple_chart_config = [
             <h4>Configuration for Super Simple Example</h4>
             <xtal-json-editor watch="[[simple_chart_config]]" height="300px"></xtal-json-editor>
             
-            <!-- <resizable-panels>
-                <div class="panel p1"><xtal-treant config="[[simple_chart_config]]"></xtal-treant></div>
+            <resizable-panels>
+                <div class="panel p1"><xtal-treant auto-zoom config="[[simple_chart_config]]"></xtal-treant></div>
                 <div class="panel p2"><xtal-treant config="[[connectorExample]]"></xtal-treant></div>
-            </resizable-panels> -->
+            </resizable-panels>
 
           </template>
 
