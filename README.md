@@ -20,10 +20,12 @@ You can set the zoom factor thusly:
 You can enable auto zoom:
 
 ```html
-<xtal-treant zoom="0.5" config="[[treeBeard]]"></xtal-treant>
+<xtal-treant auto-zoom config="[[treeBeard]]"></xtal-treant>
 ```
 
-This relies on the new resizableObserver, only available in Chrome. A polyfill is needed for other browsers (and the logic is still being tweaked).
+Which will cause the diagram to resize as the container resizes.
+
+This relies on the new resizableObserver, only available in Chrome. A polyfill is needed for other browsers (and the logic is still being tweaked), and [this polyfill](https://github.com/que-etc/resize-observer-polyfill) is used for the demo.
 
 ## Install the Polymer-CLI
 

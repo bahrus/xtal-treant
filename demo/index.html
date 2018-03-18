@@ -453,7 +453,7 @@ const simple_chart_config = [
     <h3>Basic xtal-treant demo</h3>
     <div class="chart" id="basic-example"></div>
 
-    <demo-snippet  style="width:1200px;position:relative;left:-300px;">
+    <demo-snippet>
       <template>
         <xtal-decorator>
           <script type="text/ecmascript ish">
@@ -498,19 +498,19 @@ const simple_chart_config = [
         <dom-bind>
           <template>
             <h3>Basic Example</h3>
-            <xtal-treant zoom="0.5" config="[[basicExample]]"></xtal-treant>
+            <xtal-treant auto-zoom config="[[basicExample]]"></xtal-treant>
 
             <h4>Configuration for Basic Example</h4>
             <xtal-json-editor watch="[[basicExample2]]" height="300px"></xtal-json-editor>
 
             <h3>Collapsible Example</h3>
-            <xtal-treant  config="[[collapsibleExample]]"></xtal-treant>
+            <xtal-treant auto-zoom  config="[[collapsibleExample]]"></xtal-treant>
 
             <h4>Configuration for Collapsible Example</h4>
-            <xtal-json-editor zoom="0.5" watch="[[collapsibleExample2]]" height="300px"></xtal-json-editor>
+            <xtal-json-editor auto-zoom watch="[[collapsibleExample2]]" height="300px"></xtal-json-editor>
 
             <h3>Comments, selector example</h3>
-            <xtal-treant zoom="0.5" config="[[commentsExample]]">
+            <xtal-treant auto-zoom config="[[commentsExample]]">
                 <div class="comments" style="display:none">
                     <ul>
                         <li>
@@ -569,7 +569,7 @@ const simple_chart_config = [
             <xtal-json-editor watch="[[commentsExample2]]" height="300px"></xtal-json-editor>
 
             <h3>Connector Example</h3>
-            <xtal-treant config="[[connectorExample]]"></xtal-treant>
+            <xtal-treant auto-zoom config="[[connectorExample]]"></xtal-treant>
 
             <!-- <h4>Configuration for Connector Example</h4>
             <xtal-json-editor watch="[[connectorExample]]" height="300px"></xtal-json-editor> -->
