@@ -56,6 +56,7 @@
     <div id="resizingElement" style="width:100%;height:100%">
         <div id="chartTarget" style="width:100%;height:100%"></div>
     </div>
+    <span style="font-size:5pt" id="temp"></span>
     `;
     class XtalTreant extends HTMLElement {
         constructor() {
@@ -162,13 +163,13 @@
                     const svg = entry.target.querySelector('svg');
                     if (!svg)
                         return;
-                    //let width = svg.clientWidth;
-                    //if(width === 0){
-                    const width = svg['width'].baseVal.value;
-                    //}
-                    this.zoom = entry['contentRect'].width / width;
-                    //console.log(this.zoom);
-                    //svg.setAttribute('viewBox', '0 0 ' + entry['contentRect'].width + ' ' + entry['contentRect'].height);
+                    setTimeout(() => {
+                        const width = svg['width'].baseVal.value;
+                        //document.write('svg_width = ' + width);
+                        //document.write('contentRect_width = ' + entry['contentRect'].width);
+                        this.shadowRoot.querySelector('#temp')['innerText'] = entry['contentRect'].width + '/' + width;
+                        this.zoom = entry['contentRect'].width / width;
+                    });
                 }
             });
             this.ro.observe(this.getResizingTarget(), null);

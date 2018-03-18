@@ -65,6 +65,7 @@ declare var Treant;
     <div id="resizingElement" style="width:100%;height:100%">
         <div id="chartTarget" style="width:100%;height:100%"></div>
     </div>
+    <span style="font-size:5pt" id="temp"></span>
     `;
     class XtalTreant extends HTMLElement {
         _slotted = false;
@@ -173,14 +174,16 @@ declare var Treant;
                     // entry.target.style.borderRadius = Math.max(0, 250 - entry.contentRect.width) + 'px';
 
                     const svg = (entry.target as HTMLDivElement).querySelector('svg') as SVGElement;
-                    if(!svg) return;
-                    //let width = svg.clientWidth;
-                    //if(width === 0){
+                    if (!svg) return;
+                    setTimeout(() =>{
+                        
                         const width = svg['width'].baseVal.value;
-                    //}
-                    this.zoom = entry['contentRect'].width / width;
-                    //console.log(this.zoom);
-                    //svg.setAttribute('viewBox', '0 0 ' + entry['contentRect'].width + ' ' + entry['contentRect'].height);
+                        //document.write('svg_width = ' + width);
+                        //document.write('contentRect_width = ' + entry['contentRect'].width);
+                        this.shadowRoot.querySelector('#temp')['innerText'] = entry['contentRect'].width + '/' + width;  
+                        this.zoom = entry['contentRect'].width / width;
+                    })
+    
                 }
             });
             this.ro.observe(this.getResizingTarget(), null);
@@ -223,7 +226,7 @@ declare var Treant;
         getChartTarget() {
             return this.shadowRoot.getElementById('chartTarget') as HTMLDivElement;;
         }
-        getResizingTarget(){
+        getResizingTarget() {
             return this.shadowRoot.getElementById('resizingElement') as HTMLDivElement;
         }
         _secondaryCssLoaded;
@@ -254,24 +257,24 @@ declare var Treant;
             const el = this.getChartTarget();//.querySelector('svg');
             if (!el) return;
             //for (var i = 0, ii = div.childElementCount; i < ii; i++) {
-                //const el = div.childNodes[i] as HTMLElement;
-                var p = ["webkit", "moz", "ms", "o"],
-                    s = "scale(" + zoom + ")",
-                    oString = (transformOrigin[0] * 100) + "% " + (transformOrigin[1] * 100) + "%";
+            //const el = div.childNodes[i] as HTMLElement;
+            var p = ["webkit", "moz", "ms", "o"],
+                s = "scale(" + zoom + ")",
+                oString = (transformOrigin[0] * 100) + "% " + (transformOrigin[1] * 100) + "%";
 
-                for (var i = 0; i < p.length; i++) {
-                    el.style[p[i] + "Transform"] = s;
-                    el.style[p[i] + "TransformOrigin"] = oString;
-                }
+            for (var i = 0; i < p.length; i++) {
+                el.style[p[i] + "Transform"] = s;
+                el.style[p[i] + "TransformOrigin"] = oString;
+            }
 
-                el.style.transform = s;
-                el.style.transformOrigin = oString;
-                
-                el.style.width = (100 / zoom) + '%';
-                // setTimeout( () =>{
-                //     this._zoomInProgress = false;
-                // }, 1000)
-                
+            el.style.transform = s;
+            el.style.transformOrigin = oString;
+
+            el.style.width = (100 / zoom) + '%';
+            // setTimeout( () =>{
+            //     this._zoomInProgress = false;
+            // }, 1000)
+
             //}
 
         }
