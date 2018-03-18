@@ -451,10 +451,17 @@ const simple_chart_config = [
 <body>
   <div class="vertical-section-container centered">
     <h3>Basic xtal-treant demo</h3>
-    <div class="chart" id="basic-example"></div>
+    
 
     <demo-snippet>
       <template>
+        <style>
+          @media (max-width: 30em){
+            xtal-json-editor {
+              display: none;
+            }
+          }
+        </style>
         <xtal-decorator>
           <script type="text/ecmascript ish">
             [{
@@ -505,7 +512,7 @@ const simple_chart_config = [
 
             <h3>Collapsible Example</h3>
             <xtal-treant auto-zoom  config="[[collapsibleExample]]"></xtal-treant>
-
+<div style="height:200px">&nbsp;</div>
             <h4>Configuration for Collapsible Example</h4>
             <xtal-json-editor auto-zoom watch="[[collapsibleExample2]]" height="300px"></xtal-json-editor>
 
