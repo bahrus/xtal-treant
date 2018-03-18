@@ -167,8 +167,8 @@ declare var Treant;
         ro: ResizeObserver;
         configureAutoZoom() {
             this.ro = new ResizeObserver(entries => {
-                console.log('zoominprogress = ' + this._zoomInProgress);
-                if(this._zoomInProgress) return;
+                //console.log('zoominprogress = ' + this._zoomInProgress);
+                //if(this._zoomInProgress) return;
                 for (let entry of entries) {
                     // entry.target.style.borderRadius = Math.max(0, 250 - entry.contentRect.width) + 'px';
 
@@ -240,10 +240,10 @@ declare var Treant;
             }, 0);
 
         }
-        _zoomInProgress = false;
+        //_zoomInProgress = false;
         setZoom(zoom) {
             //https://jsfiddle.net/ex1f181o/
-            this._zoomInProgress = true;
+            //this._zoomInProgress = true;
             const transformOrigin = [0, 0];
             //el = el || instance.getContainer();
             const el = this.getChartTarget();//.querySelector('svg');
@@ -263,9 +263,9 @@ declare var Treant;
                 el.style.transformOrigin = oString;
                 
                 el.style.width = (100 / zoom) + '%';
-                setTimeout( () =>{
-                    this._zoomInProgress = false;
-                }, 1000)
+                // setTimeout( () =>{
+                //     this._zoomInProgress = false;
+                // }, 1000)
                 
             //}
 

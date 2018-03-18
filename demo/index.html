@@ -443,7 +443,7 @@ const simple_chart_config = [
     <h3>Basic xtal-treant demo</h3>
     <div class="chart" id="basic-example"></div>
 
-    <demo-snippet>
+    <demo-snippet  style="width:1200px;position:relative;left:-300px;">
       <template>
         <xtal-decorator>
           <script type="text/ecmascript ish">
@@ -482,7 +482,7 @@ const simple_chart_config = [
             <xtal-json-editor watch="[[basicExample]]" height="300px"></xtal-json-editor>
 
             <h3>Collapsible Example</h3>
-            <xtal-treant zoom="0.5" config="[[collapsibleExample]]"></xtal-treant>
+            <xtal-treant  config="[[collapsibleExample]]"></xtal-treant>
 
             <h4>Configuration for Collapsible Example</h4>
             <xtal-json-editor zoom="0.5" watch="[[collapsibleExample]]" height="300px"></xtal-json-editor>
@@ -559,7 +559,7 @@ const simple_chart_config = [
             
             <resizable-panels>
                 <div class="panel p1"><xtal-treant auto-zoom config="[[simple_chart_config]]"></xtal-treant></div>
-                <div class="panel p2"><xtal-treant config="[[connectorExample]]"></xtal-treant></div>
+                <div class="panel p2"><xtal-treant auto-zoom config="[[connectorExample]]"></xtal-treant></div>
             </resizable-panels>
 
           </template>

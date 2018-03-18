@@ -14,6 +14,17 @@ You can set the zoom factor thusly:
 <xtal-treant zoom="0.5" config="[[treeBeard]]"></xtal-treant>
 ```
 
+
+*Experimental*
+
+You can enable auto zoom:
+
+```html
+<xtal-treant zoom="0.5" config="[[treeBeard]]"></xtal-treant>
+```
+
+This relies on the new resizableObserver, only available in Chrome. A polyfill is needed for other browsers (and the logic is still being tweaked).
+
 ## Install the Polymer-CLI
 
 First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your element locally.

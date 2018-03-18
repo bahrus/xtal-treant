@@ -63,7 +63,6 @@
             this._slotted = false;
             this._zoom = 0;
             this._zoomSequence = [];
-            this._zoomInProgress = false;
             this.attachShadow({ mode: 'open' });
             this.shadowRoot.appendChild(template.content.cloneNode(true));
             const slot = this.shadowRoot.querySelector('slot');
@@ -156,9 +155,8 @@
         }
         configureAutoZoom() {
             this.ro = new ResizeObserver(entries => {
-                console.log('zoominprogress = ' + this._zoomInProgress);
-                if (this._zoomInProgress)
-                    return;
+                //console.log('zoominprogress = ' + this._zoomInProgress);
+                //if(this._zoomInProgress) return;
                 for (let entry of entries) {
                     // entry.target.style.borderRadius = Math.max(0, 250 - entry.contentRect.width) + 'px';
                     const svg = entry.target.querySelector('svg');
@@ -221,9 +219,10 @@
                     this.setZoom(this._zoom);
             }, 0);
         }
+        //_zoomInProgress = false;
         setZoom(zoom) {
             //https://jsfiddle.net/ex1f181o/
-            this._zoomInProgress = true;
+            //this._zoomInProgress = true;
             const transformOrigin = [0, 0];
             //el = el || instance.getContainer();
             const el = this.getChartTarget(); //.querySelector('svg');
@@ -239,9 +238,9 @@
             el.style.transform = s;
             el.style.transformOrigin = oString;
             el.style.width = (100 / zoom) + '%';
-            setTimeout(() => {
-                this._zoomInProgress = false;
-            }, 1000);
+            // setTimeout( () =>{
+            //     this._zoomInProgress = false;
+            // }, 1000)
             //}
         }
     }
