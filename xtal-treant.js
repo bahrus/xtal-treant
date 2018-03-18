@@ -167,9 +167,9 @@
                         const width = svg['width'].baseVal.value;
                         //document.write('svg_width = ' + width);
                         //document.write('contentRect_width = ' + entry['contentRect'].width);
-                        this.shadowRoot.querySelector('#temp')['innerText'] = entry['contentRect'].width + '/' + width;
+                        this.shadowRoot.querySelector('#temp')['innerText'] = entry['contentRect'].width + '/' + width + ',' + svg['currentScale'] + ',' + svg['width'].baseVal.unitType + ',' + svg['width'].baseVal.valueInSpecifiedUnits;
                         this.zoom = entry['contentRect'].width / width;
-                    });
+                    }, 100);
                 }
             });
             this.ro.observe(this.getResizingTarget(), null);
