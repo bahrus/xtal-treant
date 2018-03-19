@@ -168,6 +168,7 @@ declare var Treant;
             }
         }
         ro: ResizeObserver;
+        //previousZoom = 1;
         configureAutoZoom() {
             this.ro = new ResizeObserver(entries => {
                 //console.log('zoominprogress = ' + this._zoomInProgress);
@@ -183,7 +184,8 @@ declare var Treant;
                         //document.write('svg_width = ' + width);
                         //document.write('contentRect_width = ' + entry['contentRect'].width);
                         //this.shadowRoot.querySelector('#temp')['innerText'] = svg.getAttribute('width');  
-                        this.zoom = entry['contentRect'].width / width;
+                        this.zoom = entry['contentRect'].width / (width);
+                        //this.previousZoom = this.zoom;
                     }, 100);
     
                 }
@@ -247,7 +249,7 @@ declare var Treant;
             setTimeout(() => {
                 this._treant = new Treant(this.config, null, null, this);
                 if (this._zoom > 0) this.setZoom(this._zoom);
-            }, 1000);
+            }, 100);
 
         }
         //_zoomInProgress = false;
