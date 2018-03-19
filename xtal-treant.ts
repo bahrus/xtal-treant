@@ -65,7 +65,6 @@ declare var Treant;
     <div id="resizingElement" style="width:100%;height:100%">
         <div id="chartTarget" style="width:100%;height:100%"></div>
     </div>
-    <span style="font-size:5pt" id="temp"></span>
     `;
     class XtalTreant extends HTMLElement {
         _slotted = false;
@@ -183,7 +182,7 @@ declare var Treant;
                         const width = svg['width'].baseVal.value;
                         //document.write('svg_width = ' + width);
                         //document.write('contentRect_width = ' + entry['contentRect'].width);
-                        this.shadowRoot.querySelector('#temp')['innerText'] = svg.getAttribute('width');  
+                        //this.shadowRoot.querySelector('#temp')['innerText'] = svg.getAttribute('width');  
                         this.zoom = entry['contentRect'].width / width;
                     }, 100);
     
