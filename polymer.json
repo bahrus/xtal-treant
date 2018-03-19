@@ -1,7 +1,23 @@
 {
+  "sources":[
+    "xtal-treant.js",
+    "Treant.js",
+    "Treant.css",
+    "vendor/*"
+  ],
   "lint": {
     "rules": [
       "polymer-2"
     ]
-  }
+  },
+  "builds":[
+    {
+      "name": "ES5",
+      "js": {"minify": true, "compile": true}
+    },
+    {
+      "name": "ES6",
+      "js": {"minify": true, "compile": false}
+    }    
+  ]
 }
