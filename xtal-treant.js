@@ -53,7 +53,7 @@
         
     </style>
     <slot></slot>
-    <div id="resizingElement" style="width:100%;height:100%">
+    <div id="resizingElement" style="width:100%;height:100%;visibility:hidden">
         <div id="chartTarget" style="width:100%;height:100%"></div>
     </div>
     `;
@@ -180,7 +180,17 @@
         discontinueAutoZoom() {
             this.ro.disconnect();
         }
+        _upgradeProperty(prop) {
+            if (this.hasOwnProperty(prop)) {
+                let value = this[prop];
+                delete this[prop];
+                this[prop] = value;
+            }
+        }
         connectedCallback() {
+            this._upgradeProperty('autoZoom');
+            this._upgradeProperty('config');
+            this._upgradeProperty('zoom');
             // BillboardCharts.observedAttributes.forEach(attrib => {
             //     this._upgradeProperty(this.snakeToCamel(attrib));
             // });
@@ -225,9 +235,16 @@
             }
             setTimeout(() => {
                 this._treant = new Treant(this.config, null, null, this);
-                if (this._zoom > 0)
+                if (this._zoom > 0) {
                     this.setZoom(this._zoom);
-            }, 100);
+                }
+                else {
+                    this.displayResizableElement();
+                }
+            }, 1000);
+        }
+        displayResizableElement() {
+            this.getResizingTarget().style.visibility = 'visible';
         }
         //_zoomInProgress = false;
         setZoom(zoom) {
@@ -252,6 +269,7 @@
             //     this._zoomInProgress = false;
             // }, 1000)
             //}
+            this.displayResizableElement();
         }
     }
     customElements.define(xtalTreant, XtalTreant);
