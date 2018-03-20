@@ -103,10 +103,10 @@ declare var Treant;
                     link.addEventListener('load', e => {
                         cssPathsCopy = cssPathsCopy.filter(path => path !== cssPath);
                         if (cssPathsCopy.length === 0) this._secondaryCssLoaded = true;
-                        setTimeout(() =>{
+                        setTimeout(() => {
                             this.onPropsChange();
                         }, 100)
-                        
+
                     });
                     this.shadowRoot.appendChild(link);
 
@@ -115,10 +115,16 @@ declare var Treant;
             } else {
                 this._secondaryCssLoaded = true;
             }
-            rootConfig.container = this.getChartTarget()
+            rootConfig.container = this.getChartTarget();
+            rootConfig.callback = {
+                onTreeLoaded: () => {
+                    this._treeLoaded = true;
+                    if (this.autoZoom) this.configureAutoZoom()
+                }
+            };
             this.onPropsChange();
         }
-
+        _treeLoaded = false;
         _zoom: number = 0;
         get zoom() {
             return this._zoom;
@@ -169,7 +175,10 @@ declare var Treant;
         }
         ro: ResizeObserver;
         //previousZoom = 1;
+        _configuredAutoZoom = false;
         configureAutoZoom() {
+            if (!this._treeLoaded || this._configuredAutoZoom) return;
+            this._configuredAutoZoom = true;
             this.ro = new ResizeObserver(entries => {
                 //console.log('zoominprogress = ' + this._zoomInProgress);
                 //if(this._zoomInProgress) return;
@@ -178,8 +187,8 @@ declare var Treant;
 
                     const svg = (entry.target as HTMLDivElement).querySelector('svg') as SVGElement;
                     if (!svg) return;
-                    setTimeout(() =>{
-                        
+                    setTimeout(() => {
+
                         const width = svg['width'].baseVal.value;
                         //document.write('svg_width = ' + width);
                         //document.write('contentRect_width = ' + entry['contentRect'].width);
@@ -187,7 +196,7 @@ declare var Treant;
                         this.zoom = entry['contentRect'].width / (width);
                         //this.previousZoom = this.zoom;
                     }, 100);
-    
+
                 }
             });
             this.ro.observe(this.getResizingTarget(), null);
@@ -260,13 +269,13 @@ declare var Treant;
                 this._treant = new Treant(this.config, null, null, this);
                 if (this._zoom > 0) {
                     this.setZoom(this._zoom);
-                }else{
+                } else {
                     this.displayResizableElement();
                 }
             }, 1000);
 
         }
-        displayResizableElement(){
+        displayResizableElement() {
             this.getResizingTarget().style.visibility = 'visible';
         }
         //_zoomInProgress = false;

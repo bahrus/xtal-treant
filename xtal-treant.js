@@ -61,8 +61,11 @@
         constructor() {
             super();
             this._slotted = false;
+            this._treeLoaded = false;
             this._zoom = 0;
             this._zoomSequence = [];
+            //previousZoom = 1;
+            this._configuredAutoZoom = false;
             this.attachShadow({ mode: 'open' });
             this.shadowRoot.appendChild(template.content.cloneNode(true));
             const slot = this.shadowRoot.querySelector('slot');
@@ -108,6 +111,13 @@
                 this._secondaryCssLoaded = true;
             }
             rootConfig.container = this.getChartTarget();
+            rootConfig.callback = {
+                onTreeLoaded: () => {
+                    this._treeLoaded = true;
+                    if (this.autoZoom)
+                        this.configureAutoZoom();
+                }
+            };
             this.onPropsChange();
         }
         get zoom() {
@@ -155,8 +165,10 @@
                     }
             }
         }
-        //previousZoom = 1;
         configureAutoZoom() {
+            if (!this._treeLoaded || this._configuredAutoZoom)
+                return;
+            this._configuredAutoZoom = true;
             this.ro = new ResizeObserver(entries => {
                 //console.log('zoominprogress = ' + this._zoomInProgress);
                 //if(this._zoomInProgress) return;
