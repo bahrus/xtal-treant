@@ -54,7 +54,7 @@
     </style>
     <slot></slot>
     <div id="resizingElement" style="width:100%;height:100%;visibility:hidden">
-        <div id="chartTarget" style="width:100%;height:100%"></div>
+        <div id="chartTarget"></div>
     </div>
     `;
     class XtalTreant extends HTMLElement {
@@ -203,13 +203,6 @@
             this._upgradeProperty('autoZoom');
             this._upgradeProperty('config');
             this._upgradeProperty('zoom');
-            // BillboardCharts.observedAttributes.forEach(attrib => {
-            //     this._upgradeProperty(this.snakeToCamel(attrib));
-            // });
-            // if (!this.cssPath) {
-            //     this.cssPath = base +  '/billboard.min.css';
-            // }
-            //<link rel="stylesheet" on-load="loaded" type="text/css" href$="[[cssPath]]">
             const link = document.createElement('link');
             link.setAttribute('rel', 'stylesheet');
             link.setAttribute('type', "text/css");
@@ -217,8 +210,6 @@
             link.addEventListener('load', e => {
                 this._mainCssLoaded = true;
                 this.onPropsChange();
-                //this.shadowRoot.getElementById('chartTarget').style.visibility = 'visible';
-                //if(this._chart) this._chart.resize();
             });
             this.shadowRoot.appendChild(link);
         }
@@ -277,10 +268,6 @@
             el.style.transform = s;
             el.style.transformOrigin = oString;
             el.style.width = (100 / zoom) + '%';
-            // setTimeout( () =>{
-            //     this._zoomInProgress = false;
-            // }, 1000)
-            //}
             this.displayResizableElement();
         }
     }
