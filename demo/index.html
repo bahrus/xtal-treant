@@ -10,7 +10,7 @@
   <script src="../../resize-observer-polyfill/dist/ResizeObserver.global.js"></script>
   <script>
     const config1 = {
-      cssPaths: ['../examples/basic-example/basic-example.css'],
+      cssPaths: [],
       connectors: {
         type: 'step'
       },
@@ -443,7 +443,7 @@ const simple_chart_config = [
   <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
   <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
   <link rel="import" href="../../vaadin-split-layout/vaadin-split-layout.html">
-  <link rel="preload" as="fetch" href="../examples/basic-example/basic-example.css">
+  <link class="treant css" relx="preload" as="fetch" href="../examples/basic-example/basic-example.css" data-postfix="basic">
   <custom-style>
     <style is="custom-style" include="demo-pages-shared-styles">
     </style>
@@ -514,7 +514,7 @@ const simple_chart_config = [
         <dom-bind>
           <template>
             <h3>Basic Example</h3>
-            <xtal-treant auto-zoom config="[[basicExample]]"></xtal-treant>
+            <xtal-treant-basic auto-zoom config="[[basicExample]]"></xtal-treant-basic>
 
             <h4 class="config">Configuration for Basic Example</h4>
             <xtal-json-editor watch="[[basicExample2]]" height="300px"></xtal-json-editor>
@@ -587,13 +587,7 @@ const simple_chart_config = [
             <h3>Connector Example</h3>
             <xtal-treant auto-zoom config="[[connectorExample]]"></xtal-treant>
 
-            <!-- <h4>Configuration for Connector Example</h4>
-            <xtal-json-editor watch="[[connectorExample]]" height="300px"></xtal-json-editor> -->
 
-            <!-- <h3>Super Simple Example</h3>
-            <xtal-treant style="height:400px;" config="[[simple_chart_config]]"></xtal-treant> -->
-            <!-- <h4>Configuration for Super Simple Example</h4>
-            <xtal-json-editor watch="[[simple_chart_config]]" height="300px"></xtal-json-editor> -->
             <h3>Resizable Simple Chart / Connector Example</h3>
             <vaadin-split-layout horizontal style="width:100%">
                 <div style="width:50%;background-color:#FFFFCC">
