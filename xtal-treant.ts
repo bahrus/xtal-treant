@@ -129,7 +129,9 @@ declare var Treant;
             rootConfig.callback = {
                 onTreeLoaded: () => {
                     this._treeLoaded = true;
-                    if (this.autoZoom) this.configureAutoZoom()
+                    if (this.autoZoom) {
+                        this.configureAutoZoom()
+                    }
                 }
             };
             //debugger;
@@ -268,14 +270,15 @@ declare var Treant;
                 this.setZoom(this._zoom);
                 return;
             }
+            this._treant = new Treant(this.config, null, null, this);
             setTimeout(() => {
-                this._treant = new Treant(this.config, null, null, this);
+               
                 if (this._zoom > 0) {
                     this.setZoom(this._zoom);
                 } else {
                     this.displayResizableElement();
                 }
-            }, 1000);
+            }, 10);
 
         }
         displayResizableElement() {
@@ -304,8 +307,10 @@ declare var Treant;
             el.style.transformOrigin = oString;
 
             el.style.width = (100 / zoom) + '%';
-
-            this.displayResizableElement();
+            setTimeout(() =>{
+                this.displayResizableElement();
+            }, 100)
+            
         }
     }
 
