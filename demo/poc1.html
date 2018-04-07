@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>POC 1</title>
+    <link rel="import" href="../bower_components/vaadin-split-layout/vaadin-split-layout.html">
+    <script src="../xtal-zoom.js"></script>
+</head>
+
+<body>
+    <vaadin-split-layout horizontal style="width:100%">
+        <div style="width:50%;background-color:#FFFFCC">
+            <xtal-zoom style="width:100%;height:100%;display:block">
+                <div id="testDiv" style="height:140px;width:180px;background-color:red;font-size:24px;color:white">
+                    LHS
+                </div>
+            </xtal-zoom>
+        </div>
+        <div style="width:50%;background-color:#CCFFFF">
+            <xtal-zoom style="width:100%;height:100%;display:block">
+                <div id="testDiv2" style="height:140px;width:180px;background-color:blue;font-size:24px;color:white">
+                    RHS
+                </div>
+            </xtal-zoom>
+        </div>
+    </vaadin-split-layout>
+
+</body>
+
+</html>
