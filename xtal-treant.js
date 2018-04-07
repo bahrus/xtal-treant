@@ -125,6 +125,29 @@
             this._upgradeProperty('config');
             this._mainCssLoaded = true;
             this.onPropsChange();
+            this._ro = new ResizeObserver(entries => {
+                //this.handleResize(entries)
+                setTimeout(() => {
+                    console.log('element resize');
+                    this._dontRedraw = true;
+                    this.onPropsChange();
+                }, 1000);
+            });
+            window.addEventListener('resize', e => {
+                console.log('window resize');
+                this.onPropsChange();
+            });
+            this._ro.observe(this, null);
+        }
+        // handleResize(entries){
+        //     // //console.log('zoominprogress = ' + this._zoomInProgress);
+        //     // //if(this._zoomInProgress) return;
+        //     // for (let entry of entries) {
+        //     // }
+        // }
+        disconnectedCallback() {
+            this._ro.disconnect();
+            this.onPropsChange();
         }
         getChartTarget() {
             return this.shadowRoot.getElementById('chartTarget');
@@ -135,6 +158,11 @@
                 return;
             if (!this._slotted && this.innerHTML.trim().length > 0)
                 return;
+            if (this._dontRedraw) {
+                this._dontRedraw = false;
+                return;
+            }
+            console.log('redrawing');
             this._treant = new Treant(this.config, null, null, this);
         }
     }

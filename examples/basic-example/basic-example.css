@@ -7,9 +7,9 @@ h1,h2,h3,h4,h5,h6 { font-size:100%; font-weight:normal; }
 q:before,q:after { content:''; }
 abbr,acronym { border:0; }
 
-body { background: #fff; }
+/* body { background: #fff; } */
 /* optional Container STYLES */
-.chart { height: 600px; margin: 5px; width: 900px; }
+.chart { height: 600px; margin: 5px; width: 80%; }
 .Treant > .node {  }
 .Treant > p { font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; font-weight: bold; font-size: 12px; }
 .node-name { font-weight: bold;}
@@ -21,11 +21,13 @@ body { background: #fff; }
     border-radius: 3px;
     background-color: #ffffff;
     border: 1px solid #000;
-    width: 200px;
+    width: 20%;
     font-family: Tahoma;
     font-size: 12px;
 }
 
+
 .nodeExample1 img {
     margin-right:  10px;
+    width: 18%;
 }

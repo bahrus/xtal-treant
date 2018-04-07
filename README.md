@@ -8,24 +8,17 @@ The web component requires a property, "config" to be set:
 <xtal-treant config="[[treeBeard]]"></xtal-treant>
 ```
 
-You can set the zoom factor thusly:
+Because the library is designed to create different tree charts, based on a passed on css file, this raises a bit of a cunnundrum for a reusable web component.  You can pass in the css file in the config setting.  This will dynamically pass the css content into the shadow DOM.  [This currently has some issues in Chrome](https://github.com/Polymer/polymer/issues/4865).
+
+So the better alternative is to define a preload link in document.head:
 
 ```html
-<xtal-treant zoom="0.5" config="[[treeBeard]]"></xtal-treant>
+<link class="treant css" relx="preload" as="fetch" href="../examples/basic-example/basic-example.css" data-postfix="basic">
 ```
 
+Note the use of "treant" and "css" in the class, and the data-postfix value.
 
-*Experimental*
-
-You can enable auto zoom:
-
-```html
-<xtal-treant auto-zoom config="[[treeBeard]]"></xtal-treant>
-```
-
-Which will cause the diagram to resize as the container resizes.
-
-This relies on the new resizableObserver, only available in Chrome. A polyfill is needed for other browsers (and the logic is still being tweaked), and [this polyfill](https://github.com/que-etc/resize-observer-polyfill) is used for the demo.
+This will cause xtal-treant to dynamically create a new web component with name xtal-treant-basic, with the contents of the css file stamped into the template.
 
 ## Install the Polymer-CLI
 

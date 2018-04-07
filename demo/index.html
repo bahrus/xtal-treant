@@ -7,7 +7,7 @@
 
   <title>xtal-treant demo</title>
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-  <!-- <script src="../../resize-observer-polyfill/dist/ResizeObserver.global.js"></script> -->
+  <script src="../../resize-observer-polyfill/dist/ResizeObserver.global.js"></script>
   <script>
     const config1 = {
       cssPaths: [],
@@ -451,11 +451,11 @@ const simple_chart_config = [
 </head>
 
 <body>
-  <div class="vertical-section-container centered">
+  <div class="vertical-section-container centered" style="margin-left:0px;margin-right:0px;max-width:100%">
     <h3>Basic xtal-treant demo</h3>
     
 
-    <demo-snippet>
+    <demo-snippet style="width:100%">
       <template>
         <style>
           @media (max-width: 30em){
@@ -514,12 +514,12 @@ const simple_chart_config = [
         <dom-bind>
           <template>
             <h3>Basic Example</h3>
-            <xtal-treant-basic auto-zoom config="[[basicExample]]"></xtal-treant-basic>
+            <xtal-treant-basic style="width:100%" config="[[basicExample]]"></xtal-treant-basic>
 
             <h4 class="config">Configuration for Basic Example</h4>
             <xtal-json-editor watch="[[basicExample2]]" height="300px"></xtal-json-editor>
 
-            <h3>Collapsible Example</h3>
+            <!-- <h3>Collapsible Example</h3>
             <xtal-treant auto-zoom  config="[[collapsibleExample]]"></xtal-treant>
 <div style="height:200px">&nbsp;</div>
             <h4 class="config">Configuration for Collapsible Example</h4>
@@ -598,7 +598,7 @@ const simple_chart_config = [
                 </div>
             </vaadin-split-layout>
 
-            <!-- <resizable-panels style="width:100%"> -->
+            <resizable-panels style="width:100%">
                 <div class="panel p1" style="width:50%">
                   <h4  class="config">Configuration for Super Simple Example</h4>
                   <xtal-json-editor watch="[[simple_chart_config]]" height="300px"></xtal-json-editor>
@@ -607,7 +607,7 @@ const simple_chart_config = [
                   <h4  class="config">Configuration for Connector Example</h4>
                   <xtal-json-editor watch="[[connectorExample2]]" height="300px"></xtal-json-editor>
                 </div>
-            <!-- </resizable-panels> -->
+            </resizable-panels> -->
 
 
           </template>
