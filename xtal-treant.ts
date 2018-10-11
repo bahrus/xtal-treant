@@ -51,6 +51,14 @@ function downloadJSFiles() {
         initXtalTreant();
     })
 }
+/**
+ * `xtal-treant`
+ *  Web component wrapper around the treant.js chart library
+ *
+ * @customElement
+ * @polymer
+ * @demo demo/index.html
+ */
 export class XtalTreant extends XtallatX(HTMLElement) {
     static get is() { return 'xtal-treant'; }
 
