@@ -1,3 +1,7 @@
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/xtal-treant)
+
+<a href="https://nodei.co/npm/xtal-treant/"><img src="https://nodei.co/npm/xtal-treant.png"></a>
+
 # \<xtal-treant\>
 
 xtal-treant is a dependency free web component wrapper around the great [Treant](http://fperucic.github.io/treant-js/) library.
