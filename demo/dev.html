@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+  <title>xtal-treant demo</title>
+  <script>
+    const config1 = {
+      cssPaths: [],
+      connectors: {
+        type: 'step'
+      },
+      node: {
+        HTMLclass: 'nodeExample1'
+      }
+    };
+    const ceo = {
+      text: {
+        name: "Mark Hill",
+        title: "Chief executive officer",
+        contact: "Tel: 01 213 123 134",
+      },
+      image: "../examples/headshots/2.jpg"
+    };
+
+    const cto = {
+      parent: ceo,
+      text: {
+        name: "Joe Linux",
+        title: "Chief Technology Officer",
+      },
+      stackChildren: true,
+      image: "../examples/headshots/1.jpg"
+    };
+    const cbo = {
+      parent: ceo,
+      stackChildren: true,
+      text: {
+        name: "Linda May",
+        title: "Chief Business Officer",
+      },
+      image: "../examples/headshots/5.jpg"
+    };
+    const cdo = {
+      parent: ceo,
+      text: {
+        name: "John Green",
+        title: "Chief accounting officer",
+        contact: "Tel: 01 213 123 134",
+      },
+      image: "../examples/headshots/6.jpg"
+    };
+    const cio = {
+      parent: cto,
+      text: {
+        name: "Ron Blomquist",
+        title: "Chief Information Security Officer"
+      },
+      image: "../examples/headshots/8.jpg"
+    };
+    const ciso = {
+      parent: cto,
+      text: {
+        name: "Michael Rubin",
+        title: "Chief Innovation Officer",
+        contact: { val: "we@aregreat.com", href: "mailto:we@aregreat.com" }
+      },
+      image: "../examples/headshots/9.jpg"
+    };
+    const cio2 = {
+      parent: cdo,
+      text: {
+        name: "Erica Reel",
+        title: "Chief Customer Officer"
+      },
+      link: {
+        href: "http://www.google.com"
+      },
+      image: "../examples/headshots/10.jpg"
+    };
+    const ciso2 = {
+      parent: cbo,
+      text: {
+        name: "Alice Lopez",
+        title: "Chief Communications Officer"
+      },
+      image: "../examples/headshots/7.jpg"
+    };
+    const ciso3 = {
+      parent: cbo,
+      text: {
+        name: "Mary Johnson",
+        title: "Chief Brand Officer"
+      },
+      image: "../examples/headshots/4.jpg"
+    };
+    const ciso4 = {
+      parent: cbo,
+      text: {
+        name: "Kirk Douglas",
+        title: "Chief Business Development Officer"
+      },
+      image: "../examples/headshots/11.jpg"
+    };
+
+    const chart_config1 = [
+      config1,
+      ceo,
+      cto,
+      cbo,
+      cdo,
+      cio,
+      ciso,
+      cio2,
+      ciso2,
+      ciso3,
+      ciso4
+    ];
+
+    const chart_config2 = JSON.parse(JSON.stringify(chart_config1));
+
+
+    const collapsible_config = {
+      chart: {
+        cssPaths: ['../examples/collapsable/collapsable.css'],
+
+        animateOnInit: true,
+
+        node: {
+          collapsable: true
+        },
+        animation: {
+          nodeAnimation: "easeOutBounce",
+          nodeSpeed: 700,
+          connectorsAnimation: "bounce",
+          connectorsSpeed: 700
+        }
+      },
+      nodeStructure: {
+        image: "../examples/collapsable/img/malory.png",
+        children: [
+          {
+            image: "../examples/collapsable/img/lana.png",
+            collapsed: true,
+            children: [
+              {
+                image: "../examples/collapsable/img/figgs.png"
+              }
+            ]
+          },
+          {
+            image: "../examples/collapsable/img/sterling.png",
+            childrenDropLevel: 1,
+            children: [
+              {
+                image: "../examples/collapsable/img/woodhouse.png"
+              }
+            ]
+          },
+          {
+            pseudo: true,
+            children: [
+              {
+                image: "../examples/collapsable/img/cheryl.png"
+              },
+              {
+                image: "../examples/collapsable/img/pam.png"
+              }
+            ]
+          }
+        ]
+      }
+    };
+
+    const collapsible_config2 = JSON.parse(JSON.stringify(collapsible_config));
+
+    const commentsConfig = {
+      cssPaths: ['../examples/comments/example8.css'],
+      levelSeparation: 70,
+      siblingSeparation: 60,
+      nodeAlign: "BOTTOM",
+      connectors: {
+        type: "step",
+        style: {
+          "stroke-width": 2,
+          "stroke": "#ccc",
+          "stroke-dasharray": "--", //"", "-", ".", "-.", "-..", ". ", "- ", "--", "- .", "--.", "--.."
+          "arrow-end": "classic-wide-long"
+        }
+      }
+    };
+
+    const first_post = {
+      innerHTML: "#first-post"
+    };
+
+    const first_reply = {
+      parent: first_post,
+      innerHTML: "#first-reply"
+    };
+
+    const second_reply = {
+      parent: first_post,
+      innerHTML: "#second-reply"
+    };
+
+    const second_reply_reply = {
+      parent: second_reply,
+      innerHTML: "#second-reply-reply"
+    };
+
+    const comments_tree_structure = [
+      commentsConfig, first_post, first_reply, second_reply, second_reply_reply
+    ];
+
+    const comments_tree_structure2 = JSON.parse(JSON.stringify(comments_tree_structure));
+
+    const connectorExample = {
+      chart: {
+        //container: "#OrganiseChart-big-commpany",
+        cssPaths: ['../examples/connectors/connectors.css', '../vendor/perfect-scrollbar/perfect-scrollbar.css'],
+        levelSeparation: 45,
+
+        rootOrientation: "WEST",
+
+        nodeAlign: "BOTTOM",
+
+        connectors: {
+          type: "step",
+          style: {
+            "stroke-width": 2
+          }
+        },
+        node: {
+          HTMLclass: "big-commpany"
+        }
+      },
+
+      nodeStructure: {
+        text: { name: "CEO" },
+        connectors: {
+          style: {
+            'stroke': '#bbb',
+            'arrow-end': 'oval-wide-long'
+          }
+        },
+        children: [
+          {
+            text: { name: "Account" },
+            stackChildren: true,
+            connectors: {
+              style: {
+                'stroke': '#8080FF',
+                'arrow-end': 'block-wide-long'
+              }
+            },
+            children: [
+              {
+                text: { name: "Receptionist" },
+                HTMLclass: "reception"
+              },
+              {
+                text: { name: "Author" }
+              }
+            ]
+          },
+          {
+            text: { name: "Operation Manager" },
+            connectors: {
+              style: {
+                'stroke': '#bbb',
+                "stroke-dasharray": "- .", //"", "-", ".", "-.", "-..", ". ", "- ", "--", "- .", "--.", "--.."
+                'arrow-start': 'classic-wide-long'
+              }
+            },
+            children: [
+              {
+                text: { name: "Manager I" },
+                connectors: {
+                  style: {
+                    stroke: "#00CE67"
+                  }
+                },
+                children: [
+                  {
+                    text: { name: "Worker I" }
+                  },
+                  {
+                    pseudo: true,
+                    connectors: {
+                      style: {
+                        stroke: "#00CE67"
+                      }
+                    },
+                    children: [
+                      {
+                        text: { name: "Worker II" }
+                      }
+                    ]
+                  },
+                  {
+                    text: { name: "Worker III" }
+                  }
+                ]
+              },
+              {
+                text: { name: "Manager II" },
+                connectors: {
+                  type: "curve",
+                  style: {
+                    stroke: "#50688D"
+                  }
+                },
+                children: [
+                  {
+                    text: { name: "Worker I" }
+                  },
+                  {
+                    text: { name: "Worker II" }
+                  }
+                ]
+              },
+              {
+                text: { name: "Manager III" },
+                connectors: {
+                  style: {
+                    'stroke': '#FF5555'
+                  }
+                },
+                children: [
+                  {
+                    text: { name: "Worker I" }
+                  },
+                  {
+                    pseudo: true,
+                    connectors: {
+                      style: {
+                        'stroke': '#FF5555'
+                      }
+                    },
+                    children: [
+                      {
+                        text: { name: "Worker II" }
+                      },
+                      {
+                        text: { name: "Worker III" }
+                      }
+                    ]
+                  },
+                  {
+                    text: { name: "Worker IV" }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            text: { name: "Delivery Manager" },
+            stackChildren: true,
+            connectors: {
+              stackIndent: 30,
+              style: {
+                'stroke': '#E3C61A',
+                'arrow-end': 'block-wide-long'
+              }
+            },
+            children: [
+              {
+                text: { name: "Driver I" }
+              },
+              {
+                text: { name: "Driver II" }
+              },
+              {
+                text: { name: "Driver III" }
+              }
+            ]
+          }
+        ]
+      }
+    };
+
+    const connectorExample2 = JSON.parse(JSON.stringify(connectorExample))
+
+    // const simple_chart_config = {
+    // 	chart: {
+    // 		cssPaths:['../examples/super-simple/super-simple.css']
+    // 	},
+
+    // 	nodeStructure: {
+    // 		text: { name: "Parent node" },
+    // 		children: [
+    // 			{
+    // 				text: { name: "First child" }
+    // 			},
+    // 			{
+    // 				text: { name: "Second child" }
+    // 			}
+    // 		]
+    // 	}
+    // };
+
+    // // // // // // // // // // // // // // // // // // // // // // // // 
+
+    const main_super_simple_config = {
+      //container: "#OrganiseChart-simple"
+      cssPaths: ['../examples/super-simple/super-simple.css']
+    };
+
+    const parent_node = {
+      text: { name: "Parent node" }
+    };
+
+    const first_child = {
+      parent: parent_node,
+      text: { name: "First child" }
+    };
+
+    const second_child = {
+      parent: parent_node,
+      text: { name: "Second child" }
+    };
+
+    const simple_chart_config = [
+      main_super_simple_config,
+      parent_node,
+      first_child,
+      second_child
+    ];
+
+  </script>
+
+<script src="https://unpkg.com/xtal-decorator@0.0.27/xtal-decorator.iife.js"></script>
+  <!-- <script async src="xtal-decorator.js"></script> -->
+  <script async src="https://cdn.jsdelivr.net/npm/xtal-json-editor/build/ES6/xtal-json-editor.js"></script>
+  <script type="module" src="../xtal-treant.js"></script>
+  <link class="treant css" relx="preload" as="fetch" href="../examples/basic-example/basic-example.css" data-postfix="basic">
+
+</head>
+
+<body>
+  <div>
+    <h3>Basic xtal-treant demo</h3>
+
+
+
+    <style>
+      @media (max-width: 30em){
+            xtal-json-editor {
+              display: none;
+            }
+            .config{
+              display: none;
+            }
+          }
+        </style>
+    <xtal-deco>
+      <script nomodule>
+        ({
+          config: chart_config1
+        })
+      </script>
+    </xtal-deco>
+    <xtal-treant-basic style="width:100%" ></xtal-treant-basic>
+
+    <h4 class="config">Configuration for Basic Example</h4>
+    <xtal-json-editor watch="[[basicExample2]]" height="300px"></xtal-json-editor>
+
+
+
+
+  </div>
+
+</body>
+
+</html>
