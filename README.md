@@ -149,7 +149,7 @@
 
     <script src="https://unpkg.com/xtal-decorator@0.0.27/xtal-decorator.iife.js"></script>
     <script async src="https://cdn.jsdelivr.net/npm/xtal-json-editor/build/ES6/xtal-json-editor.js"></script>
-    <script  src="https://unpkg.com/xtal-treant@0.0.18/xtal-treant.iife.js"></script>
+    <script  src="https://unpkg.com/xtal-treant@0.0.22/xtal-treant.iife.js"></script>
     <link class="treant css" relx="preload" as="fetch" href="https://unpkg.com/xtal-treant@0.0.18/examples/basic-example/basic-example.css" data-postfix="basic">
 
 
