@@ -291,7 +291,7 @@ function initXtalTreant() {
     loadThemedWCs();
 }
 function loadThemedWCs() {
-    loadThemedWCs2(qsa('.treant.css', document.head));
+    loadThemedWCs2(qsa('.treant.css', document));
 }
 function loadThemedWCs2(links) {
     const link = links.pop();

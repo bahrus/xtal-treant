@@ -179,7 +179,7 @@ function initXtalTreant() {
 }
 
 function loadThemedWCs() {
-    loadThemedWCs2(qsa('.treant.css', document.head as HTMLHeadElement) as HTMLLinkElement[]);
+    loadThemedWCs2(qsa('.treant.css', document) as HTMLLinkElement[]);
 }
 
 function loadThemedWCs2(links: HTMLLinkElement[]) {
