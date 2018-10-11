@@ -9,6 +9,5 @@
         ".ts",
         ".html",
         ".scss"
-    ],
-    "git.ignoreLimitWarning": true
+    ]
 }
