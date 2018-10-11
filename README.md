@@ -11,7 +11,119 @@
   <div>
     <h3>Basic xtal-treant demo</h3>
 
+  <script>
+    const config1 = {
+      cssPaths: [],
+      connectors: {
+        type: 'step'
+      },
+      node: {
+        HTMLclass: 'nodeExample1'
+      }
+    };
+    const ceo = {
+      text: {
+        name: "Mark Hill",
+        title: "Chief executive officer",
+        contact: "Tel: 01 213 123 134",
+      },
+      image: "../examples/headshots/2.jpg"
+    };
 
+    const cto = {
+      parent: ceo,
+      text: {
+        name: "Joe Linux",
+        title: "Chief Technology Officer",
+      },
+      stackChildren: true,
+      image: "../examples/headshots/1.jpg"
+    };
+    const cbo = {
+      parent: ceo,
+      stackChildren: true,
+      text: {
+        name: "Linda May",
+        title: "Chief Business Officer",
+      },
+      image: "../examples/headshots/5.jpg"
+    };
+    const cdo = {
+      parent: ceo,
+      text: {
+        name: "John Green",
+        title: "Chief accounting officer",
+        contact: "Tel: 01 213 123 134",
+      },
+      image: "../examples/headshots/6.jpg"
+    };
+    const cio = {
+      parent: cto,
+      text: {
+        name: "Ron Blomquist",
+        title: "Chief Information Security Officer"
+      },
+      image: "../examples/headshots/8.jpg"
+    };
+    const ciso = {
+      parent: cto,
+      text: {
+        name: "Michael Rubin",
+        title: "Chief Innovation Officer",
+        contact: { val: "we@aregreat.com", href: "mailto:we@aregreat.com" }
+      },
+      image: "../examples/headshots/9.jpg"
+    };
+    const cio2 = {
+      parent: cdo,
+      text: {
+        name: "Erica Reel",
+        title: "Chief Customer Officer"
+      },
+      link: {
+        href: "http://www.google.com"
+      },
+      image: "../examples/headshots/10.jpg"
+    };
+    const ciso2 = {
+      parent: cbo,
+      text: {
+        name: "Alice Lopez",
+        title: "Chief Communications Officer"
+      },
+      image: "../examples/headshots/7.jpg"
+    };
+    const ciso3 = {
+      parent: cbo,
+      text: {
+        name: "Mary Johnson",
+        title: "Chief Brand Officer"
+      },
+      image: "../examples/headshots/4.jpg"
+    };
+    const ciso4 = {
+      parent: cbo,
+      text: {
+        name: "Kirk Douglas",
+        title: "Chief Business Development Officer"
+      },
+      image: "../examples/headshots/11.jpg"
+    };
+
+    const chart_config1 = [
+      config1,
+      ceo,
+      cto,
+      cbo,
+      cdo,
+      cio,
+      ciso,
+      cio2,
+      ciso2,
+      ciso3,
+      ciso4
+    ];
+    </script>
 
     <style>
       @media (max-width: 30em){
