@@ -1,6 +1,6 @@
 {
   "name": "xtal-treant",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Web Component wrapper around treant library",
   "main": "xtal-treant.js",
   "scripts": {
