@@ -164,7 +164,7 @@ function loadThemedWCs2(links) {
     const link = links.pop();
     const postfix = link.dataset.postfix;
     let localTemplate = document.createElement('template');
-    fetch(link.href, { credentials: 'include' }).then(resp => {
+    fetch(link.href).then(resp => {
         resp.text().then(txt => {
             localTemplate.innerHTML = `
         <style>
