@@ -18,16 +18,16 @@
   },
   "homepage": "https://github.com/bahrus/xtal-treant#readme",
   "dependencies": {
-    "treant-js": "^1.0.1",
-    "xtal-latx": "0.0.44"
+    "treant-js": "1.0.1",
+    "xtal-latx": "0.0.88"
   },
   "devDependencies": {
-    "@types/node": "^10.9.1",
-    "@webcomponents/webcomponentsjs": "^2.0.0",
-    "jiife": "0.0.4",
-    "tape": "^4.9.1",
+    "@types/node": "12.0.7",
+    "@webcomponents/webcomponentsjs": "2.2.10",
+    "jiife": "0.0.12",
+    "tape": "4.10.2",
     "@types/tape": "4.2.32",
-    "xtal-test": "0.0.8",
-    "fs-extra": "7.0.0"
+    "xtal-test": "0.0.19",
+    "fs-extra": "8.0.1"
   }
 }
