@@ -24,8 +24,6 @@
   "devDependencies": {
     "@types/node": "13.11.0",
     "@webcomponents/webcomponentsjs": "2.4.3",
-    "tape": "4.13.2",
-    "@types/tape": "4.2.34",
     "xtal-test": "0.0.44",
     "fs-extra": "9.0.0"
   }
